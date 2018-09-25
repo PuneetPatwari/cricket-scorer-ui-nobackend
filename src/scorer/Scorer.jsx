@@ -17,6 +17,8 @@ const Scorer = props => (
         <Button color="primary" onClick={props.gameDetails}>Game Details</Button>
       </Col>
     </Row>
+    <br />
+    <br />
     <Row>
       <CurrentOverStatus />
     </Row>

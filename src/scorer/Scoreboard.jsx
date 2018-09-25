@@ -17,11 +17,11 @@ const ScoreBoard = props =>
         <Col md={{ size: 6, offset: 3 }}>
           <Row>
             <Col md="5" xs="4">
-              <b>Team 1</b>
+              <h3>  <b>Team 1</b> </h3>
             </Col>
             <Col sm="1" xs="2" />
             <Col style={{ textAlign: 'right' }}>
-              <b>{teamScore(props.team1, props.numberOfOvers)}</b>
+              <h3>  <b>{teamScore(props.team1, props.numberOfOvers)}</b> </h3>
             </Col>
           </Row>
         </Col>
@@ -31,10 +31,10 @@ const ScoreBoard = props =>
         <Col md={{ size: 6, offset: 3 }} sm="12">
           <Row>
             <Col>
-              Team 2 scored
+              <h5> Team 2 scored {} </h5>
             </Col>
             <Col style={{ textAlign: 'right' }}>
-              {teamScore(props.team2, props.numberOfOvers)}
+              <h5> {teamScore(props.team2, props.numberOfOvers)} </h5>
             </Col>
           </Row>
         </Col>

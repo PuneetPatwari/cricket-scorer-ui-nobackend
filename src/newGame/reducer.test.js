@@ -3,7 +3,7 @@ import reducer from './reducer';
 describe('gameInformation/reducer', () => {
   it('should return initial state of 11 players in each team', () => {
     const initialState = {
-      team1: [
+      team1Players: [
         'Player1.1',
         'Player1.2',
         'Player1.3',
@@ -16,7 +16,7 @@ describe('gameInformation/reducer', () => {
         'Player1.10',
         'Player1.11',
       ],
-      team2: [
+      team2Players: [
         'Player2.1',
         'Player2.2',
         'Player2.3',

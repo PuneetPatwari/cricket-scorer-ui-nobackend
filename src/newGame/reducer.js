@@ -1,5 +1,5 @@
 const initialState = {
-  team1: [
+  team1Players: [
     'Player1.1',
     'Player1.2',
     'Player1.3',
@@ -12,7 +12,7 @@ const initialState = {
     'Player1.10',
     'Player1.11',
   ],
-  team2: [
+  team2Players: [
     'Player2.1',
     'Player2.2',
     'Player2.3',
