@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import gameInformationReducer from '../newGame/reducer';
-import ballScoreReducer from '../scorer/reducer';
+import scoreBoardInformation from '../scorer/reducer';
 
 const rootReducer = combineReducers({
   gameInformation: gameInformationReducer,
-  ballScore: ballScoreReducer,
+  scoreBoardInformation: scoreBoardInformation,
 });
 
 export default rootReducer;
