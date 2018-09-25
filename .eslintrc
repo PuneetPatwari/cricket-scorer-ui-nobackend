@@ -1,10 +1,28 @@
 {
   "extends": "airbnb",
-  "globals": { "document": true, "window": true, "navigator": true },
-  "env": { "jest": true, "browser": true },
-  "plugins": ["jest"],
+  "globals": {
+    "document": true,
+    "window": true,
+    "navigator": true
+  },
+  "env": {
+    "jest": true,
+    "browser": true
+  },
+  "plugins": [
+    "jest"
+  ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/prop-types": 0
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/prop-types": 0,
+    "jsx-ally/heading-has-content": 0
   }
 }
