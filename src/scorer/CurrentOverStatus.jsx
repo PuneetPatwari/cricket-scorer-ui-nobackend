@@ -6,8 +6,7 @@ export class CurrentOverStatus extends React.Component {
   render() {
     return (
       <div>
-        <label>This Over:  {this.props.currentOverDetails.map(x => " "+x+" ")}</label><br></br>
-        {/* <label>Here is the current over status</label> */}
+        <label >This Over: {this.props.currentOverDetails.map(x => " "+x+" ")}</label><br></br>
         <label>Bowler :  {this.props.currentBowler}</label>
       </div>
     );
