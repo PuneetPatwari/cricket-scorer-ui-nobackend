@@ -1,0 +1,13 @@
+#!/bin/sh
+RED='\033[0;31m'
+NC='\033[0m'
+GREEN='\033[32m'
+yarn ci
+if [ "$?" == "0" ]; then
+    echo "\n\n==============================================================================================="
+    echo "${GREEN}Great job. Keep it up folks.${NC}"
+    exit 0
+fi
+echo "\n\n==============================================================================================="
+echo "${RED}Make sure you fixed all failure before pusshing to remote repository.${NC}"
+exit 1
