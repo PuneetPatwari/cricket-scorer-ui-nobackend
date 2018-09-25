@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { showBatsManListAction } from '../home/actions';
 import ScoreBoard from './Scoreboard';
 import CurrentOverStatus from './CurrentOverStatus';
-import NextBallButton from './NextBallButton';
+import BallScore from './BallScore';
 
 const Scorer = props => (
   <Container>
@@ -34,7 +34,7 @@ const Scorer = props => (
     </Row>
     <br />
     <Row>
-      <NextBallButton />
+      <BallScore />
     </Row>
   </Container >
 );
@@ -48,3 +48,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Scorer);
+
