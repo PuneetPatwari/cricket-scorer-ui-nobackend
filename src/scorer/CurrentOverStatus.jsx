@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
 export class CurrentOverStatus extends React.Component {
 
@@ -12,6 +12,7 @@ export class CurrentOverStatus extends React.Component {
     );
   }
 }
+
 
 let mapStateToProps = state => {
   return {

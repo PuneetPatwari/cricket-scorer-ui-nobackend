@@ -30,6 +30,6 @@ const initialState = {
   currentBowler: 'Player2.1',
 };
 
-const reducer = (state = initialState, action) => state;
+const reducer = (state = initialState) => state;
 
 export default reducer;

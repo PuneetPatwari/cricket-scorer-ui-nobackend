@@ -1,9 +1,9 @@
 import React from 'react';
-import Scorer from '../scorer/Scorer.jsx';
+import Scorer from '../scorer/Scorer';
 
 const NewGame = () => (
   <div>
-    <label>This is the page where the New Game Details have to be entered</label>
+    <h2>This is the page where the New Game Details have to be entered</h2>
     <Scorer />
   </div>
 );
