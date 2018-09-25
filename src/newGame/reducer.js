@@ -22,9 +22,12 @@ const initialState = {
           'Player2.10',
           'Player2.11'],
   numberOfOvers: 5,
+  currentOverDetails : ["1","2","Wd","0","4"],
+  currentBowler : "Player2.1"
 };
 
 const reducer = (state = initialState, action) => {
+  console.log(state)
   return state;
 };
 
