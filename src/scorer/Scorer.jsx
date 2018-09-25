@@ -8,6 +8,7 @@ import { goToGameDetails } from '../home/actions';
 import ScoreBoard from './Scoreboard';
 import CurrentOverStatus from './CurrentOverStatus';
 
+
 const Scorer = props => (
   <Container>
     <Row>
@@ -19,7 +20,11 @@ const Scorer = props => (
     <Row>
       <CurrentOverStatus />
     </Row>
+    <Row>
+     <NextBallButton />
+    </Row>
   </Container>
+
 );
 
 const mapDispatchToProps = dispatch => ({
