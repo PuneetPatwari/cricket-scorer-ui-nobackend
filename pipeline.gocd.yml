@@ -5,7 +5,7 @@ environments:
       - "team2UI"
       
 pipelines:
-  "team1UI":
+  "team2UI":
     group: team2
     materials:
       ui:
