@@ -14,13 +14,13 @@ const ScoreBoard = props =>
     <Container>
       <br />
       <Row>
-        <Col md={{ size: 6, offset: 3 }}>
+        <Col md={{ size: 6, offset: 0 }}>
           <Row>
             <Col md="5" xs="4">
               <h3>  <b>Team 1</b> </h3>
             </Col>
-            <Col sm="1" xs="2" />
-            <Col style={{ textAlign: 'right' }}>
+            <Col sm="1" xs="1" />
+            <Col style={{ textAlign: 'left' }}>
               <h3>  <b>{teamScore(props.team1, props.numberOfOvers)}</b> </h3>
             </Col>
           </Row>
@@ -28,13 +28,10 @@ const ScoreBoard = props =>
       </Row>
       <br />
       <Row>
-        <Col md={{ size: 6, offset: 3 }} sm="12">
+        <Col md={{ size: 6, offset: 0 }} sm="12">
           <Row>
             <Col>
-              <h5> Team 2 scored {} </h5>
-            </Col>
-            <Col style={{ textAlign: 'right' }}>
-              <h5> {teamScore(props.team2, props.numberOfOvers)} </h5>
+              <h5> Team 2 scored {teamScore(props.team2, props.numberOfOvers)}  </h5>
             </Col>
           </Row>
         </Col>

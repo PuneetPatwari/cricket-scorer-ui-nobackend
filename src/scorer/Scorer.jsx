@@ -7,14 +7,14 @@ import { connect } from 'react-redux';
 import { goToGameDetails } from '../home/actions';
 import ScoreBoard from './Scoreboard';
 import CurrentOverStatus from './CurrentOverStatus';
+import NextBallButton from './NextBallButton';
 
 
 const Scorer = props => (
   <Container>
     <Row>
-      <Col md="10" xs="4"><ScoreBoard /></Col>
-      <Col style={{ textAlign: 'right' }}>
-        <Button color="primary" onClick={props.gameDetails}>Game Details</Button>
+      <Col style={{ textAlign: 'left' }}>
+        <ScoreBoard />
       </Col>
     </Row>
     <br />
@@ -23,7 +23,13 @@ const Scorer = props => (
       <CurrentOverStatus />
     </Row>
     <Row>
-     <NextBallButton />
+      <Col style={{ textAlign: 'center' }}>
+        <Button outline color="primary" onClick={props.gameDetails}>Game Details</Button>
+      </Col>
+    </Row>
+    <br />
+    <Row>
+      <NextBallButton />
     </Row>
   </Container>
 

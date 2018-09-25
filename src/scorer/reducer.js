@@ -4,7 +4,7 @@ const initialState = {
     totalScore: 0,
     wickets: 0,
     overNumber: 0,
-    ballNumber: 5,
+    ballNumber: 0,
     isInningsCompleted: false,
   },
   team2: {
