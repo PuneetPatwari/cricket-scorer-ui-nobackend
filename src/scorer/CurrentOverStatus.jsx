@@ -1,24 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-export class CurrentOverStatus extends React.Component {
+const CurrentOverStatus = props => (
+  <div>
+    <h5>This Over: {props.currentOverDetails.map(x => ` ${x} `)}</h5>
+    <br />
+    <h5>Bowler : {props.currentBowler}</h5>
+  </div>
+);
 
-  render() {
-    return (
-      <div>
-        <label >This Over: {this.props.currentOverDetails.map(x => " "+x+" ")}</label><br></br>
-        <label>Bowler :  {this.props.currentBowler}</label>
-      </div>
-    );
-  }
-}
-
-
-let mapStateToProps = state => {
-  return {
-    currentOverDetails : state.gameInformation.currentOverDetails,
-    currentBowler : state.gameInformation.currentBowler
-  }
-}
+const mapStateToProps = state => ({
+  currentOverDetails: state.gameInformation.currentOverDetails,
+  currentBowler: state.gameInformation.currentBowler,
+});
 
 export default connect(mapStateToProps)(CurrentOverStatus);
