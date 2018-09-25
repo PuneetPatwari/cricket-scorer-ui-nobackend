@@ -1,5 +1,5 @@
 import React from 'react';
-import Scorer from '/Users/chaitanyawaikar/Projects/cricket-scorer-ui-nobackend/src/scorer/Scorer.jsx';
+import Scorer from '../scorer/Scorer.jsx';
 
 const NewGame = () => (
   <div>
