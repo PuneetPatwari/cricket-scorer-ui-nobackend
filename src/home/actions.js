@@ -7,7 +7,6 @@ export const SET_TEAM1_NAME = 'SET_TEAM1_NAME';
 export const SET_TEAM2_NAME = 'SET_TEAM2_NAME';
 export const SET_NUMBER_OF_OVERS = 'SET_NUMBER_OF_OVERS';
 
-
 export const createGameAction = () => (dispatch) => {
   dispatch({ type: CREATE_GAME });
   history.push(Routes.NEW_GAME);
@@ -15,8 +14,17 @@ export const createGameAction = () => (dispatch) => {
 
 export const showBatsManListAction = () => ({ type: SHOW_BATSMAN_LIST });
 
-export const setTeam1Name = () => ({ type: SET_TEAM1_NAME });
+export const setTeam1Name = value => ({
+  type: SET_TEAM1_NAME,
+  value,
+});
 
-export const setTeam2Name = () => ({ type: SET_TEAM1_NAME });
+export const setTeam2Name = value => ({
+  type: SET_TEAM2_NAME,
+  value,
+});
 
-export const setNumberOfOvers = () => ({ type: SET_NUMBER_OF_OVERS });
+export const setNumberOfOvers = value => ({
+  type: SET_NUMBER_OF_OVERS,
+  value,
+});

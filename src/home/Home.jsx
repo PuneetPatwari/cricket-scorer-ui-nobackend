@@ -5,9 +5,9 @@ import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 import './Home.css';
 import { createGameAction } from "./actions";
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-const Home = (props) =>
+const Home = props =>
   <Container className="h-100">
     <Row className="align-items-center h-100">
       <Col className="text-center">
@@ -16,7 +16,7 @@ const Home = (props) =>
     </Row>
   </Container>;
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   createGame: () => dispatch(createGameAction())
 });
 

@@ -30,6 +30,15 @@ const initialState = {
   currentBowler: 'Player2.1',
 };
 
-const reducer = (state = initialState) => state;
+// const reducer = (state = initialState) => state;
+const reducer = function (state = initialState, action) {
+  switch (action.type) {
+    case 'SET_NUMBER_OF_OVERS': {
+      return { ...state, numberOfOvers: action.value };
+    }
+    default:
+      return state;
+  }
+};
 
 export default reducer;

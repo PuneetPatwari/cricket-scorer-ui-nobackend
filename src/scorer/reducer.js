@@ -21,6 +21,7 @@ const initialState = {
     overNumber: 0,
     ballNumber: 2,
     isInningsCompleted: false,
+    name: 'Team1',
     batsmanList: [
       {
         name: 'Sachin',
@@ -75,6 +76,7 @@ const initialState = {
     totalScore: 150,
     wickets: 7,
     isInningsCompleted: true,
+    name: 'Team1',
   },
 };
 
@@ -148,6 +150,29 @@ const reducer = function (state = initialState, action) {
       }
       return { ...state, striker: s, nonStriker: ns };
     }
+
+    case 'SET_TEAM1_NAME': {
+      console.log(state);
+      return {
+        ...state,
+        team1: {
+          ...state.team1,
+          name: action.value,
+        },
+      };
+    }
+
+    case 'SET_TEAM2_NAME': {
+      console.log(state);
+      return {
+        ...state,
+        team2: {
+          ...state.team2,
+          name: action.value,
+        },
+      };
+    }
+
     default:
       return initialState;
   }
