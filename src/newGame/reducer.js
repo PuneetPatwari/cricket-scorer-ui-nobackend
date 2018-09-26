@@ -26,8 +26,8 @@ const initialState = {
     'Player2.11',
   ],
   numberOfOvers: 5,
-  currentOverDetails: ['1', '2', 'Wd', '0', '4'],
-  currentBowler: 'Player2.1',
+  // currentOverDetails: ['1', '2', 'Wd', '0', '4'],
+  // currentBowler: 'Player2.1',
 };
 
 // const reducer = (state = initialState) => state;
@@ -36,8 +36,14 @@ const reducer = function (state = initialState, action) {
     case 'SET_NUMBER_OF_OVERS': {
       return { ...state, numberOfOvers: action.value };
     }
+    case 'SET_TEAM1_NAME': {
+      return { ...state, team1: { ...state.team1, name: action.value } };
+    }
+    case 'SET_TEAM2_NAME': {
+      return { ...state, team1: { ...state.team2, name: action.value } };
+    }
     default:
-      return state;
+      return initialState;
   }
 };
 
