@@ -4,7 +4,7 @@ import scoreBoardInformation from '../scorer/reducer';
 
 const rootReducer = combineReducers({
   gameInformation: gameInformationReducer,
-  scoreBoardInformation,
+  scoreInformation: scoreBoardInformation,
 });
 
 export default rootReducer;

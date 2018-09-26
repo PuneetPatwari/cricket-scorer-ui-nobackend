@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Col, Button } from 'reactstrap';
 import { connect } from 'react-redux';
-import { updateOverDetails, updateScoreDetails, swapBatsman } from './actions';
+import { updateOverDetails, updateScoreDetails, swapBatsman, changeBowlerIfOverCompleted } from './actions';
 import './Scorer.css';
 
 class BallScore extends Component {
@@ -109,6 +109,7 @@ const mapDispatchProps = dispatch => ({
     dispatch(updateOverDetails(run, extra));
     dispatch(updateScoreDetails(run, extra));
     dispatch(swapBatsman(run));
+    dispatch(changeBowlerIfOverCompleted);
   },
 });
 

@@ -144,6 +144,9 @@ const reducer = function (state = initialState, action) {
       }
       return { ...state, striker: s, nonStriker: ns };
     }
+    case "CHANGE_BOWLER_ACTION": {
+      return { ...state };
+    }
     default:
       return initialState;
   }

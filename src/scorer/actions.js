@@ -20,4 +20,9 @@ const updateOverStatus = runs => ({
   runs,
 });
 
-export { updateOverDetails, updateScoreDetails, swapBatsman, updateOverStatus };
+const changeBowlerIfOverCompleted = {
+  type: 'CHANGE_BOWLER_ACTION',
+};
+
+
+export { updateOverDetails, updateScoreDetails, swapBatsman, updateOverStatus, changeBowlerIfOverCompleted };
