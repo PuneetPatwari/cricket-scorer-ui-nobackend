@@ -122,7 +122,7 @@ describe('scoreBoardInformation/reducer', () => {
         { batsman: 'Sachin', runs: 4, extra: '' },
         { batsman: 'Sachin', runs: 4, extra: '' },
       ];
-      const tempState = reducer(initialState, updateOverDetails(4));
+      const tempState = reducer(initialState, updateOverDetails(4, ''));
       expect(tempState.overDetails[0].ballDetails).toEqual(finalBallDetails);
     });
     it('swap batsman on taking 3 runs', () => {
@@ -151,7 +151,7 @@ describe('scoreBoardInformation/reducer', () => {
       initialState.team1.ballNumber = 5;
       const finalStriker = 'Sachin';
       const finalNonStriker = 'Sehwag';
-      initialState = reducer(initialState, updateScoreDetails(1));
+      initialState = reducer(initialState, updateScoreDetails(1, ''));
       const tempState = reducer(initialState, swapBatsman(1));
       expect(tempState.striker).toEqual(finalStriker);
       expect(tempState.nonStriker).toEqual(finalNonStriker);
@@ -161,7 +161,7 @@ describe('scoreBoardInformation/reducer', () => {
       initialState.team1.ballNumber = 5;
       const finalStriker = 'Sehwag';
       const finalNonStriker = 'Sachin';
-      initialState = reducer(initialState, updateScoreDetails(2));
+      initialState = reducer(initialState, updateScoreDetails(2, ''));
       const tempState = reducer(initialState, swapBatsman(2));
       expect(tempState.striker).toEqual(finalStriker);
       expect(tempState.nonStriker).toEqual(finalNonStriker);
@@ -169,13 +169,13 @@ describe('scoreBoardInformation/reducer', () => {
 
     it('Increase score of Team1 by 6 runs', () => {
       const finalTotalScore = 10;
-      const tempState = reducer(initialState, updateScoreDetails(6));
+      const tempState = reducer(initialState, updateScoreDetails(6, ''));
       expect(tempState.team1.totalScore).toEqual(finalTotalScore);
     });
 
     it('Increase ball number of Team1 on pressing next ball', () => {
       const finalBallNumber = 3;
-      const tempState = reducer(initialState, updateScoreDetails(0));
+      const tempState = reducer(initialState, updateScoreDetails(0, ''));
       expect(tempState.team1.ballNumber).toEqual(finalBallNumber);
     });
 
@@ -183,7 +183,7 @@ describe('scoreBoardInformation/reducer', () => {
       initialState.team1.ballNumber = 5;
       const finalBallNumber = 0;
       const finalOverNumber = 1;
-      const tempState = reducer(initialState, updateScoreDetails(0));
+      const tempState = reducer(initialState, updateScoreDetails(0, ''));
       expect(tempState.team1.ballNumber).toEqual(finalBallNumber);
       expect(tempState.team1.overNumber).toEqual(finalOverNumber);
     });
@@ -197,9 +197,72 @@ describe('scoreBoardInformation/reducer', () => {
           ballDetails: [{ batsman: 'Sachin', runs: 0, extra: '' }],
         },
       ];
-      const tempState = reducer(initialState, updateOverDetails(0));
+      const tempState = reducer(initialState, updateOverDetails(0, ''));
 
       expect(tempState.overDetails).toEqual(finalOverDetails);
+    });
+
+    it('Add wide for current bowler on clicking next ball', () => {
+      const finalOverDetails = [
+        {
+          bowler: 'Lee',
+          ballDetails: [
+            { batsman: 'Sachin', runs: 0, extra: '' },
+            { batsman: 'Sachin', runs: 4, extra: '' },
+            { batsman: 'Sachin', runs: 0, extra: 'W' },
+          ],
+        },
+      ];
+      const tempState = reducer(initialState, updateOverDetails(0, 'W'));
+      expect(tempState.overDetails).toEqual(finalOverDetails);
+    });
+
+    it('Add (4 + wide) 5 runs to team score which gives final score as 9', () => {
+      const finalTeam1Score = 9;
+      const tempState = reducer(initialState, updateScoreDetails(4, 'W'));
+      expect(tempState.team1.totalScore).toEqual(finalTeam1Score);
+    });
+
+    it('Add (2 + Noball) 3 runs to team score which gives final score as 7', () => {
+      const finalTeam1Score = 7;
+      const tempState = reducer(initialState, updateScoreDetails(2, 'N'));
+      expect(tempState.team1.totalScore).toEqual(finalTeam1Score);
+    });
+
+    it('Add (4 + Bye) 4 runs to team score which gives final score as 8', () => {
+      const finalTeam1Score = 8;
+      const tempState = reducer(initialState, updateScoreDetails(4, 'B'));
+      expect(tempState.team1.totalScore).toEqual(finalTeam1Score);
+    });
+
+    it('Add (2 + LB) 5 runs to team score which gives final score as 6', () => {
+      const finalTeam1Score = 6;
+      const tempState = reducer(initialState, updateScoreDetails(2, 'LB'));
+      expect(tempState.team1.totalScore).toEqual(finalTeam1Score);
+    });
+
+    it('Do not change ball number on conceding a Wide', () => {
+      const finalBallNumber = 2;
+      const tempState = reducer(initialState, updateScoreDetails(0, 'W'));
+      expect(tempState.team1.ballNumber).toEqual(finalBallNumber);
+    });
+
+    it('Do not change ball number on conceding a No ball', () => {
+      const finalBallNumber = 2;
+      const tempState = reducer(initialState, updateScoreDetails(0, 'N'));
+      expect(tempState.team1.ballNumber).toEqual(finalBallNumber);
+    });
+
+    it('Change ball number on conceding a Bye', () => {
+      const finalBallNumber = 3;
+      const tempState = reducer(initialState, updateScoreDetails(0, 'B'));
+      expect(tempState.team1.ballNumber).toEqual(finalBallNumber);
+    });
+
+    it('Change ball number on conceding a Leg-Bye', () => {
+      const finalBallNumber = 3;
+      const tempState = reducer(initialState, updateScoreDetails(0, 'LB'));
+      expect(tempState.team1.ballNumber).toEqual(finalBallNumber);
     });
   });
 });

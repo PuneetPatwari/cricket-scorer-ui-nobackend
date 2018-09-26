@@ -79,7 +79,14 @@ const initialState = {
 const reducer = function (state = initialState, action) {
   switch (action.type) {
     case 'UPDATE_SCORE_DETAILS': {
-      let currentBallNumber = state.team1.ballNumber + 1;
+      let extraRun = 0;
+      let currentBallNumber = state.team1.ballNumber;
+      if (action.extra === 'W' || action.extra === 'N') {
+        extraRun = 1;
+      } else {
+        currentBallNumber += 1;
+      }
+
       let currentOverNumber = state.team1.overNumber;
       if (currentBallNumber === 6) {
         currentBallNumber = 0;
@@ -89,7 +96,7 @@ const reducer = function (state = initialState, action) {
         ...state,
         team1: {
           ...state.team1,
-          totalScore: state.team1.totalScore + action.runs,
+          totalScore: state.team1.totalScore + action.runs + extraRun,
           ballNumber: currentBallNumber,
           overNumber: currentOverNumber,
         },
@@ -104,7 +111,7 @@ const reducer = function (state = initialState, action) {
             ...state.overDetails,
             {
               bowler: state.currentBowler,
-              ballDetails: [{ batsman: state.striker, runs: action.runs, extra: '' }],
+              ballDetails: [{ batsman: state.striker, runs: action.runs, extra: action.extra }],
             },
           ],
         };
@@ -117,7 +124,8 @@ const reducer = function (state = initialState, action) {
             ...state.overDetails[state.team1.overNumber],
             ballDetails: [
               ...state.overDetails[state.team1.overNumber].ballDetails,
-              { batsman: state.striker, runs: action.runs, extra: '' },
+              // Check extra field befre adding score for batsman later
+              { batsman: state.striker, runs: action.runs, extra: action.extra },
             ],
           },
         ],

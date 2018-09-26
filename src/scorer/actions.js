@@ -1,11 +1,13 @@
-const updateOverDetails = runs => ({
+const updateOverDetails = (runs, extra) => ({
   type: 'UPDATE_OVER_DETAILS',
   runs,
+  extra,
 });
 
-const updateScoreDetails = runs => ({
+const updateScoreDetails = (runs, extra) => ({
   type: 'UPDATE_SCORE_DETAILS',
   runs,
+  extra,
 });
 
 const swapBatsman = runs => ({
