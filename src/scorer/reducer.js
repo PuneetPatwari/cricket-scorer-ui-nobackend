@@ -13,7 +13,6 @@ const initialState = {
   // Will get from Story 2
   currentBowler: 'Lee',
   currentOver: ['0', '4'],
-  // Team1 and Team2 will get from Story 1
   team1: {
     name: 'Team1',
     totalScore: 4,

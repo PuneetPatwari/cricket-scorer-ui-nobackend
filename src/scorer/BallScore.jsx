@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Col, Button } from 'reactstrap';
+import { Container, Col, Button, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import { updateOverDetails, updateScoreDetails, swapBatsman } from './actions';
 import './Scorer.css';
@@ -37,19 +37,31 @@ class BallScore extends Component {
         key={i}
         value={i}
         onClick={event => this.setRun(event)}
-        color="secondary"
+        color="primary"
       >
-        {' '}
-        {i}{' '}
-                </Button>);
+        {'  '}
+        {i}{'  '}
+      </Button>);
     }
     return (
       <div>
-        <h4>This ball</h4>
-        {rows}
+        <Container>
+          <Row>
+            <Col style={{ textAlign: 'left' }} >
+              <h5> Runs: </h5>
+              {rows}
+            </Col>
+          </Row>
+        </Container>
         <br />
         <br />
-        <h5> Extras: </h5>
+        <Container>
+          <Row>
+            <Col style={{ textAlign: 'left' }} >
+              <h5> Extras: </h5>
+            </Col>
+          </Row>
+        </Container>
         <Container>
           <Button
             color="info"
@@ -84,9 +96,20 @@ class BallScore extends Component {
             LB
           </Button>
         </Container>
+        <br />
+        <Container>
+          <Col style={{ textAlign: 'center' }}>
+            <Button color="danger">
+              {'  '}
+              Out{'  '}
+            </Button>
+          </Col>
+        </Container>
+        <br />
         <Container>
           <Col style={{ textAlign: 'center' }}>
             <Button
+              outline
               color="primary"
               onClick={() => this.onNextBallClick(this.state.run, this.state.extra)}
             >
