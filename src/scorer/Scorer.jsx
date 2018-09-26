@@ -24,19 +24,25 @@ const Scorer = props => (
     </Row>
     <br />
     <Row>
-      <Button color="primary" onClick={props.showBatsmanListAction}> Out </Button>
+      <Button color="primary" onClick={props.showBatsmanListAction}>
+        {' '}
+        Out{' '}
+      </Button>
     </Row>
     <br />
     <Row>
       <Col style={{ textAlign: 'center' }}>
-        <Link className="btn btn-primary" to="/gameDetails"> Game Details </Link>
+        <Link className="btn btn-primary" to="/gameDetails">
+          {' '}
+          Game Details{' '}
+        </Link>
       </Col>
     </Row>
     <br />
     <Row>
       <BallScore />
     </Row>
-  </Container >
+  </Container>
 );
 
 const mapDispatchToProps = dispatch => ({
@@ -47,5 +53,7 @@ const mapStateToProps = state => ({
   showBatsmanList: state.showBatsmanList,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Scorer);
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Scorer);
