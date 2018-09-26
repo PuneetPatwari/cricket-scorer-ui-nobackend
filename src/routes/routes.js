@@ -20,7 +20,7 @@ const AppRouter = () =>
         <Route exact path={Routes.HOME} component={Home} />
         <Route exact path={Routes.NEW_GAME} component={NewGame} />
         <Route exact path={Routes.SCORER} component={Scorer} />
-        <Route path={Routes.GAME_DETAILS} component={GameDetails} />
+        <Route exact path={Routes.GAME_DETAILS} component={GameDetails} />
       </Switch>
     </Router>);
 

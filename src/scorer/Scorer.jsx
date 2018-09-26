@@ -3,12 +3,13 @@ import { Container } from 'reactstrap';
 import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 import Button from 'reactstrap/lib/Button';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { goToGameDetails } from '../home/actions';
+import { showBatsManListAction } from '../home/actions';
 import ScoreBoard from './Scoreboard';
 import CurrentOverStatus from './CurrentOverStatus';
 import NextBallButton from './NextBallButton';
-
+import Modal from './Modal';
 
 const Scorer = props => (
   <Container>
@@ -24,7 +25,7 @@ const Scorer = props => (
     </Row>
     <Row>
       <Col style={{ textAlign: 'center' }}>
-        <Button outline color="primary" onClick={props.gameDetails}>Game Details</Button>
+        <Link className="btn btn-primary" to="/gameDetails"> Game Details </Link>
       </Col>
     </Row>
     <br />
@@ -36,7 +37,11 @@ const Scorer = props => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  gameDetails: () => dispatch(goToGameDetails()),
+  showBatsmanListAction: () => dispatch(showBatsManListAction()),
 });
 
-export default connect(undefined, mapDispatchToProps)(Scorer);
+const mapStateToProps = state => ({
+  showBatsmanList: state.showBatsmanList,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Scorer);
