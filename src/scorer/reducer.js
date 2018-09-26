@@ -41,7 +41,7 @@ const reducer = function (state = initialState, action) {
         ...state,
         team1: {
           ...state.team1,
-          totalScore: (state.team1.totalScore += action.runs),
+          totalScore: state.team1.totalScore + action.runs,
           ballNumber: currentBallNumber,
           overNumber: currentOverNumber,
         },
@@ -77,16 +77,16 @@ const reducer = function (state = initialState, action) {
     }
 
     case 'SWAP_BATSMAN': {
-      let striker = state.striker;
-      let nonStriker = state.nonStriker;
+      let s = state.striker;
+      let ns = state.nonStriker;
 
       if (
         (action.runs % 2 === 1 && state.team1.ballNumber !== 0) ||
         (action.runs % 2 !== 1 && state.team1.ballNumber === 0)
       ) {
-        [striker, nonStriker] = [nonStriker, striker];
+        [s, ns] = [ns, s];
       }
-      return { ...state, striker, nonStriker };
+      return { ...state, striker: s, nonStriker: ns };
     }
     default:
       return initialState;
