@@ -81,6 +81,8 @@ describe('scoreBoardInformation/reducer', () => {
           wickets: 7,
           isInningsCompleted: true,
         },
+        toggleBatsmanDropDown: false,
+        showBatsmanList: false,
       };
     });
 
