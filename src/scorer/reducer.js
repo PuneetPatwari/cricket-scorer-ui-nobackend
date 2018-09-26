@@ -15,7 +15,8 @@ const initialState = {
   currentOver: ['0', '4'],
   // Team1 and Team2 will get from Story 1
   team1: {
-    totalScore: 0,
+    name: 'Team1',
+    totalScore: 4,
     wickets: 0,
     overNumber: 0,
     ballNumber: 2,
@@ -70,6 +71,7 @@ const initialState = {
   toggleBatsmanDropDown: false,
   showBatsmanList: false,
   team2: {
+    name: 'Team2',
     totalScore: 150,
     wickets: 7,
     isInningsCompleted: true,
@@ -104,6 +106,8 @@ const reducer = function (state = initialState, action) {
     }
 
     case 'UPDATE_OVER_DETAILS': {
+      let currentExtra = action.extra;
+      if ((currentExtra === 'B' || currentExtra === 'LB') && action.runs === 0) currentExtra = '';
       if (state.team1.ballNumber === 0) {
         return {
           ...state,
@@ -111,7 +115,7 @@ const reducer = function (state = initialState, action) {
             ...state.overDetails,
             {
               bowler: state.currentBowler,
-              ballDetails: [{ batsman: state.striker, runs: action.runs, extra: action.extra }],
+              ballDetails: [{ batsman: state.striker, runs: action.runs, extra: currentExtra }],
             },
           ],
         };
@@ -125,7 +129,7 @@ const reducer = function (state = initialState, action) {
             ballDetails: [
               ...state.overDetails[state.team1.overNumber].ballDetails,
               // Check extra field befre adding score for batsman later
-              { batsman: state.striker, runs: action.runs, extra: action.extra },
+              { batsman: state.striker, runs: action.runs, extra: currentExtra },
             ],
           },
         ],
@@ -135,7 +139,7 @@ const reducer = function (state = initialState, action) {
     case 'SWAP_BATSMAN': {
       let s = state.striker;
       let ns = state.nonStriker;
-
+      /* The if condition handles the logic for swapping of batsman */
       if (
         (action.runs % 2 === 1 && state.team1.ballNumber !== 0) ||
         (action.runs % 2 !== 1 && state.team1.ballNumber === 0)
