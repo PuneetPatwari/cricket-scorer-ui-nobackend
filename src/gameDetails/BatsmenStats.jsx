@@ -2,28 +2,35 @@ import React, { Component } from 'react';
 // import { Container, Col, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
-import { isStrikerOrNonStriker, calcBatsmenRuns } from './calculateBatsmenDetails';
+import { isStrikerOrNonStriker, calcBatsmenRuns, calcBatsmenBalls, calcBatsmen4sand6sBalls, calcStrikeRate } from './calculateBatsmenDetails';
 
 class BatsmenStats extends Component {
   displayBatsmenDetails() {
     const rows = [];
     const batsmanList = this.props.batsmanList.filter(b => !b.yetToBat);
-    for (let i = 0; i < batsmanList.length; i += 1) {
+    for (let playersIndex = 0; playersIndex < batsmanList.length; playersIndex += 1) {
       const batsmen = {
-        name: batsmanList[i].name,
+        name: batsmanList[playersIndex].name,
         isStrikerOrNonStriker:
-        isStrikerOrNonStriker(batsmanList[i].name, this.props.striker, this.props.nonStriker),
-        runs: calcBatsmenRuns(batsmanList[i].name, this.props.overDetails),
+        isStrikerOrNonStriker(
+          batsmanList[playersIndex].name,
+          this.props.striker, this.props.nonStriker,
+        ),
+        runs: calcBatsmenRuns(batsmanList[playersIndex].name, this.props.overDetails),
+        balls: calcBatsmenBalls(batsmanList[playersIndex].name, this.props.overDetails),
+        foursAndSixs:
+        calcBatsmen4sand6sBalls(batsmanList[playersIndex].name, this.props.overDetails),
       };
-      rows.push(<tr>
-        <th scope="row">{i + 1}</th>
-        <td>{batsmen.isStrikerOrNonStriker ? <b>{batsmen.name}*</b> : batsmen.name}</td>
-        <td>{batsmen.runs}</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>1.1</td>
-      </tr>);
+      rows.push((
+        <tr>
+          <th scope="row">{playersIndex + 1}</th>
+          <td>{batsmen.isStrikerOrNonStriker ? <b>{batsmen.name}*</b> : batsmen.name}</td>
+          <td>{batsmen.runs}</td>
+          <td>{batsmen.balls}</td>
+          <td>{batsmen.foursAndSixs.fours}</td>
+          <td>{batsmen.foursAndSixs.sixs}</td>
+          <td>{calcStrikeRate(batsmen.runs, batsmen.balls)}</td>
+        </tr>));
     }
     return rows;
   }
