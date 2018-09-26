@@ -7,7 +7,7 @@ class BallScore extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      run: 0,
+      run: -1,
     };
   }
 
@@ -16,23 +16,27 @@ class BallScore extends Component {
   }
   render() {
     const rows = [];
-    for (let i = 0; i < 8; i++) {
-      rows.push(<button className={`run-button ${i === this.state.run ? 'bg-blue' : ''}`} key={i} value={i} onClick={event => this.setRun(event)}> {i} </button>,);
+    for (let i = 0; i < 8; i += 1) {
+      rows.push(<button className={`run-button ${i === this.state.run ? 'bg-blue' : ''}`} key={i} value={i} onClick={event => this.setRun(event)}> {i} </button>);
     }
     return (
       <div>
-            <h3>This ball</h3>
-            <br />
-            {rows}
-            <br />
-            <button onClick={() => this.props.handleCurrentBall(this.state.run)}>Next ball</button>
-          </div>
+        <h3>This ball</h3>
+        <br />
+        {rows}
+        <br />
+        <button onClick={() => this.props.handleCurrentBall(this.state.run)}>Next ball</button>
+      </div>
     );
   }
 }
 
 const mapDispatchProps = dispatch => ({
   handleCurrentBall: (run) => {
+    if (run === -1) {
+      alert('Please select the run scored for the ball');
+      return;
+    }
     dispatch(updateOverDetails(run));
     dispatch(updateScoreDetails(run));
     dispatch(swapBatsman(run));

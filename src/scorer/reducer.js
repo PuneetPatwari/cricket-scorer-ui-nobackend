@@ -56,7 +56,7 @@ const reducer = function (state = initialState, action) {
             ...state.overDetails,
             {
               bowler: state.currentBowler,
-              ballDetails: { batsman: state.striker, runs: action.runs, extra: '' },
+              ballDetails: [{ batsman: state.striker, runs: action.runs, extra: '' }],
             },
           ],
         };
