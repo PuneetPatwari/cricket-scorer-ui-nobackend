@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import { Container, Col, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
-import isStrikerOrNonStriker from './calculateBatsmenDetails';
+import { isStrikerOrNonStriker, calcBatsmenRuns } from './calculateBatsmenDetails';
 
 class BatsmenStats extends Component {
   displayBatsmenDetails() {
@@ -13,11 +13,12 @@ class BatsmenStats extends Component {
         name: batsmanList[i].name,
         isStrikerOrNonStriker:
         isStrikerOrNonStriker(batsmanList[i].name, this.props.striker, this.props.nonStriker),
+        runs: calcBatsmenRuns(batsmanList[i].name, this.props.overDetails),
       };
       rows.push(<tr>
         <th scope="row">{i + 1}</th>
         <td>{batsmen.isStrikerOrNonStriker ? <b>{batsmen.name}*</b> : batsmen.name}</td>
-        <td>0</td>
+        <td>{batsmen.runs}</td>
         <td>0</td>
         <td>0</td>
         <td>0</td>
