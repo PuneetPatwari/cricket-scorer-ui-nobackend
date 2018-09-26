@@ -13,11 +13,8 @@ import NextBallButton from './NextBallButton';
 const Scorer = props => (
   <Container>
     <Row>
-      <Col style={{ textAlign: 'left' }} md="10" xs="auto">
+      <Col style={{ textAlign: 'left' }}>
         <ScoreBoard />
-      </Col>
-      <Col style={{ textAlign: 'right' }}>
-        <Link className="btn btn-primary" to="/gameDetails"> Game Details </Link>
       </Col>
     </Row>
     <br />
@@ -28,6 +25,12 @@ const Scorer = props => (
     <br />
     <Row>
       <Button color="primary" onClick={props.showBatsmanListAction}> Out </Button>
+    </Row>
+    <br />
+    <Row>
+      <Col style={{ textAlign: 'center' }}>
+        <Link className="btn btn-primary" to="/gameDetails"> Game Details </Link>
+      </Col>
     </Row>
     <br />
     <Row>
