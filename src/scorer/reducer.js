@@ -21,7 +21,6 @@ const initialState = {
     overNumber: 0,
     ballNumber: 2,
     isInningsCompleted: false,
-    name: 'Team1',
     batsmanList: [
       {
         name: 'Sachin',
@@ -76,7 +75,6 @@ const initialState = {
     totalScore: 150,
     wickets: 7,
     isInningsCompleted: true,
-    name: 'Team1',
   },
 };
 

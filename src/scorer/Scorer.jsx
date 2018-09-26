@@ -3,7 +3,7 @@ import { Container } from 'reactstrap';
 import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 import Button from 'reactstrap/lib/Button';
-import { Link } from 'react-router-dom';
+import RLink from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import { showBatsManListAction } from '../home/actions';
 import ScoreBoard from './Scoreboard';
@@ -32,10 +32,10 @@ const Scorer = props => (
     <br />
     <Row>
       <Col style={{ textAlign: 'center' }}>
-        <Link className="btn btn-primary" to="/gameDetails">
+        <RLink className="btn btn-primary" to="/gameDetails">
           {' '}
           Game Details{' '}
-        </Link>
+        </RLink>
       </Col>
     </Row>
     <br />

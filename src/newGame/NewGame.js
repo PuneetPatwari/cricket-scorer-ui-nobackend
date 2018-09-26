@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import RLink from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import { Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { setTeam1Name, setTeam2Name, setNumberOfOvers } from '../home/actions';
@@ -38,10 +38,10 @@ const NewGame = props => (
       <FormGroup check row>
         <Col sm={{ size: 10, offset: 2 }}>
           {/* <Button>Submit Game Details</Button> */}
-          <Link className="btn btn-primary" to="/scorer">
+          <RLink className="btn btn-primary" to="/scorer">
             {' '}
             Submit Game Details{' '}
-          </Link>
+          </RLink>
         </Col>
       </FormGroup>
     </Form>
