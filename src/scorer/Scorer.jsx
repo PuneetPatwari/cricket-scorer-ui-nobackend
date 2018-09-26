@@ -9,13 +9,15 @@ import { showBatsManListAction } from '../home/actions';
 import ScoreBoard from './Scoreboard';
 import CurrentOverStatus from './CurrentOverStatus';
 import NextBallButton from './NextBallButton';
-import Modal from './Modal';
 
 const Scorer = props => (
   <Container>
     <Row>
-      <Col style={{ textAlign: 'left' }}>
+      <Col style={{ textAlign: 'left' }} md="10" xs="auto">
         <ScoreBoard />
+      </Col>
+      <Col style={{ textAlign: 'right' }}>
+        <Link className="btn btn-primary" to="/gameDetails"> Game Details </Link>
       </Col>
     </Row>
     <br />
@@ -23,17 +25,15 @@ const Scorer = props => (
     <Row>
       <CurrentOverStatus />
     </Row>
+    <br />
     <Row>
-      <Col style={{ textAlign: 'center' }}>
-        <Link className="btn btn-primary" to="/gameDetails"> Game Details </Link>
-      </Col>
+      <Button color="primary" onClick={props.showBatsmanListAction}> Out </Button>
     </Row>
     <br />
     <Row>
       <NextBallButton />
     </Row>
-  </Container>
-
+  </Container >
 );
 
 const mapDispatchToProps = dispatch => ({
