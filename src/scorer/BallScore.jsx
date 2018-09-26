@@ -10,9 +10,15 @@ class BallScore extends Component {
       run: -1,
     };
   }
-
+  onNextBallClick(run) {
+    this.props.handleCurrentBall(run);
+    this.resetRun();
+  }
   setRun(e) {
     this.setState({ run: Number(e.target.value) });
+  }
+  resetRun() {
+    this.setState({ run: -1 });
   }
   render() {
     const rows = [];
@@ -25,10 +31,11 @@ class BallScore extends Component {
         <br />
         {rows}
         <br />
-        <button onClick={() => this.props.handleCurrentBall(this.state.run)}>Next ball</button>
+        <button onClick={() => this.onNextBallClick(this.state.run)}>Next ball</button>
       </div>
     );
   }
+
 }
 
 const mapDispatchProps = dispatch => ({
