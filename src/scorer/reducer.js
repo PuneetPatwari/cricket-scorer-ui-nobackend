@@ -76,7 +76,8 @@ const reducer = function (state = initialState, action) {
             ...state.overDetails[state.team1.overNumber],
             ballDetails: [
               ...state.overDetails[state.team1.overNumber].ballDetails,
-              { batsman: state.striker, runs: action.runs, extra: action.extra }, // Check extra field befre adding score for batsman later
+              // Check extra field befre adding score for batsman later
+              { batsman: state.striker, runs: action.runs, extra: action.extra },
             ],
           },
         ],
