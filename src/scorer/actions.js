@@ -45,6 +45,11 @@ const selectNextPlayer = name => ({
   name,
 });
 
+const selectBowler = name => ({
+  type: 'SELECT_BOWLER',
+  name,
+});
+
 const updateYetToBat = batsmanName => ({
   type: 'UPDATE_YET_TO_BAT',
   batsmanName,
@@ -64,13 +69,16 @@ const updateSelectedPlayer = batsmanName =>
   (dispatch) => {
     const yetToBatAction = updateYetToBat(batsmanName);
     dispatch(yetToBatAction);
+const updateSelectedPlayer = batsmanName => (dispatch) => {
+  const yetToBatAction = updateYetToBat(batsmanName);
+  dispatch(yetToBatAction);
 
-    const updateWicketAction = updateWicket();
-    dispatch(updateWicketAction);
+  const updateWicketAction = updateWicket();
+  dispatch(updateWicketAction);
 
-    const toggleModalObj = toggleModal();
-    dispatch(toggleModalObj);
-  };
+  const toggleModalObj = toggleModal();
+  dispatch(toggleModalObj);
+};
 
 const resetSelectedPlayerToBlank = () => ({
   type: 'RESET_SELECTED_PLAYER_TO_BLANK',
@@ -111,4 +119,5 @@ export {
   resetSelectedPlayerToBlank,
   changeCurrentBowler,
   toggleBowlerDropDownList,
+  selectBowler,
 };

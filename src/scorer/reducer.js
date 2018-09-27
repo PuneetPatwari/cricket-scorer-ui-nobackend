@@ -13,7 +13,6 @@ const initialState = {
   nonStriker: 'Sehwag',
   // Will get from Story 2
   currentBowler: 'Lee',
-  currentOver: ['0', '4'],
   team1: {
     name: 'Team1',
     totalScore: 4,
@@ -71,6 +70,8 @@ const initialState = {
   toggleBatsmanDropDown: false,
   toggleModal: false,
   selectedBatsman: '',
+  selectedBowler: '',
+  selectedBatsman: 'Sachin',
   toggleBowlerDropDown: false,
   team2: {
     name: 'Team2',
@@ -268,11 +269,20 @@ const reducer = function (state = initialState, action) {
       return { ...state, selectedBatsman: action.name };
     }
 
+    case 'SELECT_BOWLER': {
+      return { ...state, selectedBowler: action.name };
+    }
+
     case 'UPDATE_STRIKER_BATSMAN': {
       return { ...state, striker: state.selectedBatsman };
     }
     case 'CHANGE_CURRENT_BOWLER': {
-      return { ...state, currentBowler: action.value };
+      return {
+        ...state,
+        currentBowler: action.value,
+        selectedBowler: '',
+        toggleModal: !state.toggleModal,
+      };
     }
 
     case 'TOGGLE_BOWLER_DROPDOWN': {

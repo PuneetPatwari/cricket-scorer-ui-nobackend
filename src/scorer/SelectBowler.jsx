@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { toggleBowlerDropDownList, changeCurrentBowler } from './actions';
+import { toggleBowlerDropDownList, selectBowler } from './actions';
 
 const SelectBowler = props => (
   <div>
     <Dropdown isOpen={props.toggleBowlerDropDown} toggle={props.toggleBowlerDropDownList}>
-      <DropdownToggle caret>Select next Bowler</DropdownToggle>
+      <DropdownToggle caret>
+        {props.selectedBowler === '' ? 'Select next Bowler' : props.selectedBowler}
+      </DropdownToggle>
       <DropdownMenu>
         {props.bowlerList.filter(bowler => bowler !== props.currentBowler).map(bowler => (
-          <DropdownItem key={bowler} onClick={() => props.changeCurrentBowler(bowler)}>
+          <DropdownItem key={bowler} onClick={() => props.selectBowler(bowler)}>
             {bowler}
           </DropdownItem>
         ))}
@@ -22,11 +24,12 @@ const mapStateToProps = state => ({
   bowlerList: state.gameInformation.team2Players,
   toggleBowlerDropDown: state.scoreBoardInformation.toggleBowlerDropDown,
   currentBowler: state.scoreBoardInformation.currentBowler,
+  selectedBowler: state.scoreBoardInformation.selectedBowler,
 });
 
 const mapDispatchToProps = dispatch => ({
   toggleBowlerDropDownList: () => dispatch(toggleBowlerDropDownList()),
-  changeCurrentBowler: name => dispatch(changeCurrentBowler(name)),
+  selectBowler: name => dispatch(selectBowler(name)),
 });
 
 export default connect(

@@ -10,7 +10,7 @@ const CurrentOverStatus = props => (
         {!(props.currentOver === 0 && props.currentBall === 0)}
         {props.currentOverDetails[
           props.currentBall === 0 ? props.currentOver - 1 : props.currentOver
-        ].ballDetails.map(x => ` ${x.runs}${x.extra} |`)}
+        ].ballDetails.map(x => (x.batsman !== '' ? ` ${x.runs}${x.extra} |` : `${x.runs}Out |`))}
       </h5>
       <br />
       <h5>Bowler : {props.currentBowler}</h5>

@@ -130,7 +130,10 @@ describe('scoreBoardInformation/reducer', () => {
       toggleBatsmanDropDown: false,
       showBatsmanList: false,
       toggleModal: false,
-      selectedBatsman: ''
+      selectedBatsman: '',
+      toggleBowlerDropDown: false,
+      selectedBowler: '',
+      selectedBatsman: 'Sachin',
     };
   });
 
