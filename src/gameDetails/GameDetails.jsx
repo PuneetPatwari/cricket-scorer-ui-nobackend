@@ -17,6 +17,8 @@ const GameDetails = () => (
           <Link className="btn btn-primary" to="/scorer"> Back </Link>
         </div>
       </Row>
+      <br />
+      <br />
       <Row>
         <Col> <BatsmenStats /></Col>
       </Row>
