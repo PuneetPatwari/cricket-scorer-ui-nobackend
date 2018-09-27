@@ -222,10 +222,6 @@ const reducer = function (state = initialState, action) {
       return { ...state, toggleModal: !state.toggleModal };
     }
 
-    case 'SELECT_BATSMAN': {
-      return state;
-    }
-
     case 'UPDATE_WICKET': {
       return { ...state, team1: { ...state.team1, wickets: state.team1.wickets + 1 }, striker: '' };
     }

@@ -1,5 +1,5 @@
 import reducer from './reducer';
-import { updateOverDetails, swapBatsman, updateScoreDetails, updateWicket, updateYetToBat } from './actions';
+import { updateOverDetails, swapBatsman, updateScoreDetails, updateWicket, updateYetToBat, selectNextPlayer } from './actions';
 
 describe('scoreBoardInformation/reducer', () => {
   describe('Modify all relevant states on going for next ball', () => {
@@ -331,6 +331,12 @@ describe('Modify state when player is out', () => {
       },
     };
   });
+  it('Update wicket', () => {
+    const finalWicketState = 1;
+    const updateWicketAction = updateWicket();
+    const tempState = reducer(initialState, updateWicketAction);
+    expect(tempState.team1.wickets).toEqual(finalWicketState);
+  });
   it('Update wicket and reset striker', () => {
     const finalWicketState = 1;
     const updateWicketAction = updateWicket();
@@ -355,5 +361,10 @@ describe('Modify state when player is out', () => {
     const updateYetToBatAction = updateYetToBat('Player 11');
     const tempState = reducer(initialState, updateYetToBatAction);
     expect(tempState.team1.batsmanList[10]).toEqual(finalBatsmanState);
+  });
+  it('Update selected player when player is selcted from dropdown', () => {
+    const selectNextPlayerAction = selectNextPlayer('Player 3');
+    const tempState = reducer(initialState, selectNextPlayerAction);
+    expect(tempState.selectedBatsman).toEqual('Player 3');
   });
 });
