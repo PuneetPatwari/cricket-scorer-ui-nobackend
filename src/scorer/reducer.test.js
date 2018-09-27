@@ -1,5 +1,5 @@
 import reducer from './reducer';
-import { updateOverDetails, swapBatsman, updateScoreDetails, updateWicket, updateYetToBat, selectNextPlayer } from './actions';
+import { updateOverDetails, swapBatsman, updateScoreDetails, updateWicket, updateYetToBat, selectNextPlayer, updateStrikerBatsman, resetSelectedPlayerToBlank } from './actions';
 
 describe('scoreBoardInformation/reducer', () => {
   describe('Modify all relevant states on going for next ball', () => {
@@ -366,5 +366,22 @@ describe('Modify state when player is out', () => {
     const selectNextPlayerAction = selectNextPlayer('Player 3');
     const tempState = reducer(initialState, selectNextPlayerAction);
     expect(tempState.selectedBatsman).toEqual('Player 3');
+  });
+  it('Update striker player to selected player', () => {
+    const selectNextPlayerAction = selectNextPlayer('Player 3');
+    // updating state to update selectedPlayer state first
+    const tempState1 = reducer(initialState, selectNextPlayerAction);
+    const updateStrikerBatsmanAction = updateStrikerBatsman();
+    const tempState = reducer(tempState1, updateStrikerBatsmanAction);
+    expect(tempState.striker).toEqual('Player 3');
+  });
+  it('check selected player state is getting blank', () => {
+    const selectNextPlayerAction = selectNextPlayer('Player 3');
+    // updating state to update selectedPlayer state first
+    const tempState1 = reducer(initialState, selectNextPlayerAction);
+    expect(tempState1.selectedBatsman).toEqual('Player 3');
+    const resetSelectedPlayerToBlankAction = resetSelectedPlayerToBlank();
+    const tempState = reducer(tempState1, resetSelectedPlayerToBlankAction);
+    expect(tempState.selectedBatsman).toEqual('');
   });
 });
