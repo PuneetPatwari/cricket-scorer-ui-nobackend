@@ -9,7 +9,7 @@ const initialState = {
   striker: 'Sachin',
   nonStriker: 'Sehwag',
   // Will get from Story 2
-  currentBowler: 'Lee',
+  currentBowler: 'Shoaib',
   team1: {
     name: 'Team1',
     totalScore: 0,
@@ -176,10 +176,21 @@ const reducer = function (state = initialState, action) {
       let currentExtra = action.extra;
       if ((currentExtra === 'B' || currentExtra === 'LB') && action.runs === 0) currentExtra = '';
       if (state.team1.ballNumber === 0) {
+        if (state.team1.overNumber === 0) {
+          return {
+            ...state,
+            overDetails: [
+              {
+                bowler: state.currentBowler,
+                ballDetails: [{ batsman: state.striker, runs: action.runs, extra: currentExtra }]
+              }
+            ]
+          };
+        }
         return {
           ...state,
           overDetails: [
-            ...state.overDetails,
+            ...state.overDetails.slice(0, state.team1.currentOverNumber),
             {
               bowler: state.currentBowler,
               ballDetails: [{ batsman: state.striker, runs: action.runs, extra: currentExtra }]
@@ -192,7 +203,7 @@ const reducer = function (state = initialState, action) {
         overDetails: [
           ...state.overDetails.slice(0, state.team1.overNumber),
           {
-            ...state.overDetails[state.team1.overNumber],
+            bowler: state.currentBowler,
             ballDetails: [
               ...state.overDetails[state.team1.overNumber].ballDetails,
               // Check extra field befre adding score for batsman later

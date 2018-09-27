@@ -20,7 +20,7 @@ describe('scoreBoardInformation/reducer', () => {
     initialState = {
       overDetails: [
         {
-          bowler: 'Lee',
+          bowler: 'Shoaib',
           ballDetails: [
             { batsman: 'Sachin', runs: 0, extra: '' },
             { batsman: 'Sachin', runs: 4, extra: '' }
@@ -30,7 +30,7 @@ describe('scoreBoardInformation/reducer', () => {
       striker: 'Sachin',
       nonStriker: 'Sehwag',
       // Will get from Story 2
-      currentBowler: 'Lee',
+      currentBowler: 'Shoaib',
       // Team1 and Team2 will get from Story 1
       team1: {
         name: 'Team1',
@@ -218,7 +218,7 @@ describe('scoreBoardInformation/reducer', () => {
       initialState.team1.ballNumber = 0;
       const finalOverDetails = [
         {
-          bowler: 'Lee',
+          bowler: 'Shoaib',
           ballDetails: [{ batsman: 'Sachin', runs: 0, extra: '' }]
         }
       ];
@@ -230,7 +230,7 @@ describe('scoreBoardInformation/reducer', () => {
     it('Add wide for current bowler on clicking next ball', () => {
       const finalOverDetails = [
         {
-          bowler: 'Lee',
+          bowler: 'Shoaib',
           ballDetails: [
             { batsman: 'Sachin', runs: 0, extra: '' },
             { batsman: 'Sachin', runs: 4, extra: '' },
