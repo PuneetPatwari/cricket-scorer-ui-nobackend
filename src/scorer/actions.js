@@ -40,6 +40,10 @@ const toggleModal = () => ({
   type: 'TOGGLE_MODAL'
 });
 
+const toggleBowlerModal = () => ({
+  type: 'TOGGLE_BOWLER_MODAL'
+});
+
 const selectNextPlayer = name => ({
   type: 'SELECT_NEXT_PLAYER',
   name
@@ -114,5 +118,6 @@ export {
   resetSelectedPlayerToBlank,
   changeCurrentBowler,
   toggleBowlerDropDownList,
-  selectBowler
+  selectBowler,
+  toggleBowlerModal
 };

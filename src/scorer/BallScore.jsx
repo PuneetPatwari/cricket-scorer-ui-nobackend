@@ -6,7 +6,7 @@ import {
   Row,
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { resetSelectedPlayerToBlank, updateOverDetails, updateScoreDetails, swapBatsman, changeBowlerIfOverCompleted, toggleModal, updateStrikerBatsman, updateWicket } from './actions';
+import { resetSelectedPlayerToBlank, updateOverDetails, updateScoreDetails, swapBatsman, changeBowlerIfOverCompleted, toggleBowlerModal, toggleModal, updateStrikerBatsman, updateWicket } from './actions';
 import DropDownModal from '../modal/Modal';
 import './Scorer.css';
 import './BallScore.css';
@@ -21,16 +21,18 @@ class BallScore extends Component {
       modal: true,
     };
   }
-  onNextBallClick(run, extra) {
+  onNextBallClick(run, extra, selectedBatsman) {
     if (this.props.currentOver === this.props.overs) {
       alert('Game Over. You may watch GAME DETAILS');
       return;
     }
-    this.props.handleCurrentBall(run, extra);
+    this.props.handleCurrentBall(run, extra, selectedBatsman);
     this.resetRun();
     this.resetExtra();
     if (this.props.currentBall === 5 && this.props.currentOver < this.props.overs - 1) {
-      this.props.toggleModal();
+      console.log("Toggle Bowler Modal");
+      
+      this.props.toggleBowlerModal();
     }
   }
   setRun(e) {
@@ -48,9 +50,9 @@ class BallScore extends Component {
   toggleIsOut() {
     this.setState({ isOut: !this.state.isOut });
   }
-  toggleModal() {
-    this.setState({ modal: !this.state.modal });
-  }
+  // toggleModal() {
+  //   this.setState({ modal: !this.state.modal });
+  // }
   renderRuns() {
     const rows = [];
     for (let i = 0; i < 8; i += 1) {
@@ -151,7 +153,7 @@ class BallScore extends Component {
           <Button
             outline
             color="primary"
-            onClick={() => this.onNextBallClick(this.state.run, this.state.extra)}
+            onClick={() => this.onNextBallClick(this.state.run, this.state.extra, this.props.selectedBatsman)}
           >
             Next Ball
           </Button>
@@ -160,13 +162,15 @@ class BallScore extends Component {
     );
   }
 
-  renderModalForNextBowler(){
+  renderModalForNextBowler() {
     return (<div>
         <DropDownModal batsman={false} />
       </div>);
   }
 
   render() {
+    console.log('Rendrer Model');
+    
     return (
       <div>
         {this.renderRuns()}
@@ -176,8 +180,7 @@ class BallScore extends Component {
         {this.renderOut()}
         <br />
         {this.renderNextBall()}
-        {this.renderModalForNextBowler()}
-        {/* <button onClick={() => this.onNextBallClick(this.state.run)}>Next ball</button> */}
+        { this.renderModalForNextBowler() }
       </div>
     );
   }
@@ -202,6 +205,7 @@ const mapStateToProps = state => ({
   wickets: state.scoreBoardInformation.team1.wickets,
   selectedBatsman: state.scoreBoardInformation.selectedBatsman,
   overs: state.gameInformation.numberOfOvers,
+  toggleBowlerModal: state.scoreBoardInformation.toggleBowlerModal,
 });
 
 
@@ -221,6 +225,7 @@ const mapDispatchProps = dispatch => ({
     dispatch(resetSelectedPlayerToBlank())
   },
   toggleModal: () => dispatch(toggleModal()),
+  toggleBowlerModal: () => dispatch(toggleBowlerModal()),
   updateWicket: () => dispatch(updateWicket()),
 });
 

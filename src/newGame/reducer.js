@@ -25,7 +25,7 @@ const initialState = {
     'Player2.10',
     'Player2.11',
   ],
-  numberOfOvers: 2,
+  numberOfOvers: 3,
   // currentOverDetails: ['1', '2', 'Wd', '0', '4'],
   // currentBowler: 'Player2.1',
 };

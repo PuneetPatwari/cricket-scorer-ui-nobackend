@@ -1,11 +1,8 @@
 const initialState = {
   overDetails: [
     {
-      bowler: 'Lee',
-      ballDetails: [
-        { batsman: 'Sachin', runs: 0, extra: '' },
-        { batsman: 'Sachin', runs: 4, extra: '' }
-      ]
+      bowler: '',
+      ballDetails: []
     }
   ],
   showBatsmanList: false,
@@ -15,10 +12,10 @@ const initialState = {
   currentBowler: 'Lee',
   team1: {
     name: 'Team1',
-    totalScore: 4,
+    totalScore: 0,
     wickets: 0,
     overNumber: 0,
-    ballNumber: 2,
+    ballNumber: 0,
     isInningsCompleted: false,
     batsmanList: [
       {
@@ -69,13 +66,14 @@ const initialState = {
   },
   toggleBatsmanDropDown: false,
   toggleModal: false,
+  toggleBowlerModal: false,
   selectedBatsman: '',
   selectedBowler: '',
   toggleBowlerDropDown: false,
   team2: {
     name: 'Team2',
-    totalScore: 150,
-    wickets: 7,
+    totalScore: 80,
+    wickets: 5,
     isInningsCompleted: true,
     bowlerList: [
       {
@@ -250,6 +248,10 @@ const reducer = function (state = initialState, action) {
       return { ...state, toggleModal: !state.toggleModal };
     }
 
+    case 'TOGGLE_BOWLER_MODAL': {
+      return { ...state, toggleBowlerModal: !state.toggleBowlerModal };
+    }
+
     case 'UPDATE_WICKET': {
       return { ...state, team1: { ...state.team1, wickets: state.team1.wickets + 1 }, striker: '' };
     }
@@ -280,7 +282,7 @@ const reducer = function (state = initialState, action) {
         ...state,
         currentBowler: action.value,
         selectedBowler: '',
-        toggleModal: !state.toggleModal
+        toggleBowlerModal: !state.toggleBowlerModal
       };
     }
 
@@ -301,7 +303,9 @@ const reducer = function (state = initialState, action) {
 
     case 'SET_CURRENT_BLOWER': {
       const bolwersList = action.value;
-      return { ...state, currentBowler: bolwersList[0].name };
+      const updatedOverDetails = state.overDetails;
+      updatedOverDetails.bowler = bolwersList[0].name;
+      return { ...state, currentBowler: bolwersList[0].name, overDetails: updatedOverDetails };
     }
     case 'RESET_SELECTED_PLAYER_TO_BLANK': {
       return { ...state, selectedBatsman: '' };

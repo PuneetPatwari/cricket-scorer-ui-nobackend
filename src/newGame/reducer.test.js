@@ -31,7 +31,7 @@ describe('gameInformation/reducer', () => {
         'Player2.10',
         'Player2.11'
       ],
-      numberOfOvers: 2
+      numberOfOvers: 3
     };
   });
   it('should return initial state of 11 players in each team', () => {
