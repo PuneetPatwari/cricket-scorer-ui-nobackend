@@ -5,15 +5,16 @@ import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 import ScoreBoard from '../scorer/Scoreboard';
 import BatsmenStats from './BatsmenStats';
+import './GameDetails.css';
 
 const GameDetails = () => (
   <Container>
     <div>
-      <Row>
-        <Col md="10" xs="4"><ScoreBoard /></Col>
-        <Col style={{ textAlign: 'left' }}>
+      <Row className="heading">
+        <div className="scoreboard"><ScoreBoard /></div>
+        <div className="btn-back" style={{ textAlign: 'left' }}>
           <Link className="btn btn-primary" to="/scorer"> Back </Link>
-        </Col>
+        </div>
       </Row>
       <Row>
         <Col> <BatsmenStats /></Col>

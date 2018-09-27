@@ -7,35 +7,35 @@ import { connect } from 'react-redux';
 import ScoreBoard from './Scoreboard';
 import CurrentOverStatus from './CurrentOverStatus';
 import BallScore from './BallScore';
+import './Scorer.css';
 
 const Scorer = () => (
-  <Container>
-    <Row>
-      <Col style={{ textAlign: 'left' }}>
-        <ScoreBoard />
-      </Col>
-    </Row>
-    <br />
-    <br />
-    <Row>
-      <CurrentOverStatus />
-    </Row>
-    <br />
-    <br />
-    <br />
-    <Row>
-      <BallScore />
-    </Row>
-    <Row>
-      <Col style={{ textAlign: 'center' }}>
-        <RLink className="btn btn-outline-info" to="/gameDetails">
-          {' '}
-        Game Details{' '}
-        </RLink>
-      </Col>
-    </Row>
-  </Container>
+  <div className="outermost-cotainer">
+    <div className="inner-container">
+      <Container>
+        <Row>
+          <Col>
+            <ScoreBoard />
+          </Col>
+        </Row>
+        <hr />
+        <Row>
+          <CurrentOverStatus />
+        </Row>
+        <hr />
+        <Row>
+          <BallScore />
+        </Row>
+        <br />
+        <Row className="btn-game-details">
+            <RLink className="btn btn-outline-info" to="/gameDetails">
+              {' '}
+              Game Details{' '}
+            </RLink>
+        </Row>
+      </Container>
+    </div>
+  </div>
 );
-
 
 export default connect()(Scorer);

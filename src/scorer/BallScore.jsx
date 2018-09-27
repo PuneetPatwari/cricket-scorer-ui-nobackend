@@ -3,6 +3,7 @@ import { Container, Col, Button, Row, Modal, ModalHeader, ModalBody, ModalFooter
 import { connect } from 'react-redux';
 import { updateOverDetails, updateScoreDetails, swapBatsman } from './actions';
 import './Scorer.css';
+import './BallScore.css';
 
 class BallScore extends Component {
   constructor(props) {
@@ -50,15 +51,15 @@ class BallScore extends Component {
       >
         {'  '}
         {i}{'  '}
-      </Button>);
+                </Button>);
     }
     return (
-      <Container>
+      <Container className="select-score">
         <Row>
-          <Col style={{ textAlign: 'left' }} >
-            <h5> Runs: </h5>
-            {rows}
-          </Col>
+          <h5> Runs: </h5>
+        </Row>
+        <Row>
+          {rows}
         </Row>
       </Container>
     );
@@ -133,7 +134,8 @@ class BallScore extends Component {
           <Button
             outline
             color="primary"
-            onClick={() => this.onNextBallClick(this.state.run, this.state.extra)} //If out is pressed make the batsman empty and do all action for next ball click followed by modal display
+            onClick={() => this.onNextBallClick(this.state.run, this.state.extra)}
+           // If out is pressed make the batsman empty and do all action for next ball click followed by modal display
           >
             Next Ball
           </Button>
@@ -169,7 +171,6 @@ class BallScore extends Component {
     return (
       <div>
         {this.renderRuns()}
-        <br />
         <br />
         {this.renderExtras()}
         <br />
