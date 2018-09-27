@@ -80,7 +80,15 @@ describe('scoreBoardInformation/reducer', () => {
           totalScore: 150,
           wickets: 7,
           isInningsCompleted: true,
+          bowlerList: [
+            {
+              name: 'Lee',
+              yetToBowl: false,
+            },
+          ],
         },
+        toggleBatsmanDropDown: false,
+        showBatsmanList: false,
       };
     });
 

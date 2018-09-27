@@ -8,6 +8,7 @@ const initialState = {
       ],
     },
   ],
+  showBatsmanList: false,
   striker: 'Sachin',
   nonStriker: 'Sehwag',
   // Will get from Story 2
@@ -75,6 +76,12 @@ const initialState = {
     totalScore: 150,
     wickets: 7,
     isInningsCompleted: true,
+    bowlerList: [
+      {
+        name: 'Lee',
+        yetToBowl: false,
+      },
+    ],
   },
 };
 

@@ -5,6 +5,7 @@ import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 import ScoreBoard from '../scorer/Scoreboard';
 import BatsmenStats from './BatsmenStats';
+import BowlerStats from './BowlerStats';
 
 const GameDetails = () => (
   <Container>
@@ -17,6 +18,10 @@ const GameDetails = () => (
       </Row>
       <Row>
         <Col> <BatsmenStats /></Col>
+      </Row>
+      <br />
+      <Row>
+        <Col> <BowlerStats /></Col>
       </Row>
     </div>
   </Container>
