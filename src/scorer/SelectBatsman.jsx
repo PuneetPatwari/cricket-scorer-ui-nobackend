@@ -7,7 +7,7 @@ const SelectBatsman = props => {
   return (
     <div>
       <Dropdown isOpen={props.toggleBatsmanDropDown} toggle={props.toggleBatsmanDropDownList}>
-        <DropdownToggle caret>Select next Batsman</DropdownToggle>
+        <DropdownToggle caret>{props.selectedBatsman != '' ? props.selectedBatsman : 'Select Next Player'}</DropdownToggle>
         <DropdownMenu>
           {props.yetToBatBatsmanList.filter(x => x.yetToBat).map(x => (
             <DropdownItem key={x.name} onClick={() => props.selectNextPlayer(x.name)} >{x.name}</DropdownItem>

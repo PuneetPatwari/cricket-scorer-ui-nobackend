@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
-import { updateSelectedPlayer, toggleModal } from '../scorer/actions';
+import { updateSelectedPlayer, resetModalStatesForBatsman } from '../scorer/actions';
 import SelectBatsman from '../scorer/SelectBatsman';
 
 class DropDownModal extends Component {
@@ -16,8 +16,10 @@ class DropDownModal extends Component {
             {this.props.batsman ? <SelectBatsman /> : null}
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={() => this.props.updateSelectedPlayer(this.props.selectedBatsman)}>Select</Button>
-            <Button color="secondary" onClick={this.props.toggleModalAction}>Cancel</Button>
+            {this.props.selectedBatsman != '' ?
+              <Button color="primary" onClick={() => this.props.updateSelectedPlayer(this.props.selectedBatsman)}>Select</Button> :
+              <Button color="primary" disabled={true}>Select</Button>}
+            <Button color="secondary" onClick={() => this.props.resetModalStatesForBatsman()}>Cancel</Button>
           </ModalFooter>
         </Modal >
       );
@@ -26,7 +28,7 @@ class DropDownModal extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  toggleModalAction: () => dispatch(toggleModal()),
+  resetModalStatesForBatsman: () => dispatch(resetModalStatesForBatsman()),
   updateSelectedPlayer: batsmanName => dispatch(updateSelectedPlayer(batsmanName)),
 });
 

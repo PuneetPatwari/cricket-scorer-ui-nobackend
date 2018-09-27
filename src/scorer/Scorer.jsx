@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import ScoreBoard from './Scoreboard';
 import CurrentOverStatus from './CurrentOverStatus';
 import BallScore from './BallScore';
+import CurrentPlayers from './CurrentPlayers';
 import './Scorer.css';
 
 const Scorer = () => (
@@ -22,16 +23,17 @@ const Scorer = () => (
         <Row>
           <CurrentOverStatus />
         </Row>
+        <CurrentPlayers />
         <hr />
         <Row>
           <BallScore />
         </Row>
         <br />
         <Row className="btn-game-details">
-            <RLink className="btn btn-outline-info" to="/gameDetails">
-              {' '}
-              Game Details{' '}
-            </RLink>
+          <RLink className="btn btn-outline-info" to="/gameDetails">
+            {' '}
+            Game Details{' '}
+          </RLink>
         </Row>
       </Container>
     </div>

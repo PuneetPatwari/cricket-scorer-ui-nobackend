@@ -8,6 +8,7 @@ const initialState = {
       ],
     },
   ],
+  showBatsmanList: false,
   striker: 'Sachin',
   nonStriker: 'Sehwag',
   // Will get from Story 2
@@ -69,7 +70,7 @@ const initialState = {
   },
   toggleBatsmanDropDown: false,
   toggleModal: false,
-  selectedBatsman: 'Sachin',
+  selectedBatsman: '',
   team2: {
     name: 'Team2',
     totalScore: 150,
@@ -216,6 +217,10 @@ const reducer = function (state = initialState, action) {
       return { ...state, striker: s, nonStriker: ns };
     }
 
+    case 'CHANGE_BOWLER_ACTION': {
+      return { ...state };
+    }
+
     case 'SET_TEAM1_NAME': {
       console.log(state);
       return {
@@ -244,10 +249,6 @@ const reducer = function (state = initialState, action) {
 
     case 'TOGGLE_MODAL': {
       return { ...state, toggleModal: !state.toggleModal };
-    }
-
-    case 'SELECT_BATSMAN': {
-      return state;
     }
 
     case 'UPDATE_WICKET': {
@@ -285,9 +286,10 @@ const reducer = function (state = initialState, action) {
 
     case 'SET_CURRENT_BLOWER': {
       const bolwersList = action.value;
-
-
       return { ...state, currentBowler: bolwersList[0].name };
+    }
+    case 'RESET_SELECTED_PLAYER_TO_BLANK': {
+      return { ...state, selectedBatsman: '' };
     }
 
     default:

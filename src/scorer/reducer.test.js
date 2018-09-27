@@ -7,6 +7,9 @@ import {
   updateYetToBat,
   setStrikerNonStrikerName,
   setCurrentBowler,
+  selectNextPlayer,
+  updateStrikerBatsman,
+  resetSelectedPlayerToBlank,
 } from './actions';
 
 describe('scoreBoardInformation/reducer', () => {
@@ -125,8 +128,9 @@ describe('scoreBoardInformation/reducer', () => {
           ],
         },
         toggleBatsmanDropDown: false,
+        showBatsmanList: false,
         toggleModal: false,
-        selectedBatsman: 'Sachin',
+        selectedBatsman: '',
       };
     });
 
@@ -367,6 +371,12 @@ describe('Modify state when player is out', () => {
       },
     };
   });
+  it('Update wicket', () => {
+    const finalWicketState = 1;
+    const updateWicketAction = updateWicket();
+    const tempState = reducer(initialState, updateWicketAction);
+    expect(tempState.team1.wickets).toEqual(finalWicketState);
+  });
   it('Update wicket and reset striker', () => {
     const finalWicketState = 1;
     const updateWicketAction = updateWicket();
@@ -419,5 +429,26 @@ describe('Modify state when player is out', () => {
     ];
     const tempState = reducer(initialState, setCurrentBowler(bowllerList));
     expect(tempState.currentBowler).toEqual('Puneet');
+  it('Update selected player when player is selcted from dropdown', () => {
+    const selectNextPlayerAction = selectNextPlayer('Player 3');
+    const tempState = reducer(initialState, selectNextPlayerAction);
+    expect(tempState.selectedBatsman).toEqual('Player 3');
+  });
+  it('Update striker player to selected player', () => {
+    const selectNextPlayerAction = selectNextPlayer('Player 3');
+    // updating state to update selectedPlayer state first
+    const tempState1 = reducer(initialState, selectNextPlayerAction);
+    const updateStrikerBatsmanAction = updateStrikerBatsman();
+    const tempState = reducer(tempState1, updateStrikerBatsmanAction);
+    expect(tempState.striker).toEqual('Player 3');
+  });
+  it('check selected player state is getting blank', () => {
+    const selectNextPlayerAction = selectNextPlayer('Player 3');
+    // updating state to update selectedPlayer state first
+    const tempState1 = reducer(initialState, selectNextPlayerAction);
+    expect(tempState1.selectedBatsman).toEqual('Player 3');
+    const resetSelectedPlayerToBlankAction = resetSelectedPlayerToBlank();
+    const tempState = reducer(tempState1, resetSelectedPlayerToBlankAction);
+    expect(tempState.selectedBatsman).toEqual('');
   });
 });

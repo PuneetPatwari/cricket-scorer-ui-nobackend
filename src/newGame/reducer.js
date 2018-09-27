@@ -51,7 +51,7 @@ const reducer = function (state = initialState, action) {
       return { ...state, team2Players: ballers };
     }
     default:
-      return initialState;
+      return state;
   }
 };
 
