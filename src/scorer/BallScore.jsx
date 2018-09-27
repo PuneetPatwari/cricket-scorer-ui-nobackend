@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Col, Button, Row, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { connect } from 'react-redux';
-import { updateOverDetails, updateScoreDetails, swapBatsman } from './actions';
+import { updateOverDetails, updateScoreDetails, swapBatsman, toggleModal, updateStrikerBatsman, updateWicket } from './actions';
+import DropDownModal from '../modal/Modal';
 import './Scorer.css';
 import './BallScore.css';
 
@@ -118,10 +119,8 @@ class BallScore extends Component {
     return (
       <Container>
         <Col style={{ textAlign: 'center' }}>
-          <Button color="danger" onClick={() => this.toggleIsOut()}>
-            {'  '}
-            Out{'  '}
-          </Button>
+          <Button color="danger" onClick={() => handlePlayerOut(this.props)}> Out </Button>
+          <DropDownModal batsman={true} />
         </Col>
       </Container>
     );
@@ -184,11 +183,23 @@ class BallScore extends Component {
   }
 }
 
+const handlePlayerOut = props => {
+  if (props.wickets === 9) {
+    props.updateWicket();
+    setTimeout(() => {
+      alert('Game Over!');
+    }, 1000);
+  } else {
+    props.toggleModal();
+  }
+}
+
 const mapStateToProps = state => ({
   currentOverDetails: state.scoreBoardInformation.overDetails,
   currentOver: state.scoreBoardInformation.team1.overNumber,
   currentBall: state.scoreBoardInformation.team1.ballNumber,
   currentBowler: state.scoreBoardInformation.currentBowler,
+  wickets: state.scoreBoardInformation.team1.wickets,
 });
 
 
@@ -200,12 +211,15 @@ const mapDispatchProps = dispatch => ({
     }
     dispatch(updateOverDetails(run, extra));
     dispatch(updateScoreDetails(run, extra));
+    dispatch(updateStrikerBatsman());
     dispatch(swapBatsman(run));
   },
+  toggleModal: () => dispatch(toggleModal()),
+  updateWicket: () => dispatch(updateWicket()),
 });
 
 const connectedBallScore = connect(
-  null,
+  mapStateToProps,
   mapDispatchProps,
 )(BallScore);
 export default connectedBallScore;

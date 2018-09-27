@@ -35,7 +35,7 @@ const initialState = {
       },
       {
         name: 'Player 4',
-        yetToBat: false,
+        yetToBat: true,
       },
       {
         name: 'Player 5',
@@ -68,13 +68,46 @@ const initialState = {
     ],
   },
   toggleBatsmanDropDown: false,
-  showBatsmanList: false,
+  toggleModal: false,
+  selectedBatsman: 'Sachin',
   team2: {
     name: 'Team2',
     totalScore: 150,
     wickets: 7,
     isInningsCompleted: true,
   },
+};
+
+const updateBatsmanList = (batsmanList, batsmanName) => {
+  const index = batsmanList.findIndex(e => e.name === batsmanName);
+  let newBatsmanList;
+  if (index === 0) {
+    newBatsmanList = [
+      {
+        name: batsmanName,
+        yetToBat: false,
+      },
+      ...batsmanList.slice(index + 1),
+    ];
+  } else if (index === batsmanList.length - 1) {
+    newBatsmanList = [
+      ...batsmanList.slice(0, index),
+      {
+        name: batsmanName,
+        yetToBat: false,
+      },
+    ];
+  } else {
+    newBatsmanList = [
+      ...batsmanList.slice(0, index),
+      {
+        name: batsmanName,
+        yetToBat: false,
+      },
+      ...batsmanList.slice(index + 1),
+    ];
+  }
+  return newBatsmanList;
 };
 
 const reducer = function (state = initialState, action) {
@@ -168,6 +201,40 @@ const reducer = function (state = initialState, action) {
           name: action.value,
         },
       };
+    }
+
+    case 'TOGGLE_BATSMAN_DROPDOWN': {
+      return { ...state, toggleBatsmanDropDown: !state.toggleBatsmanDropDown };
+    }
+
+    case 'TOGGLE_MODAL': {
+      return { ...state, toggleModal: !state.toggleModal };
+    }
+
+    case 'SELECT_BATSMAN': {
+      return state;
+    }
+
+    case 'UPDATE_WICKET': {
+      return { ...state, team1: { ...state.team1, wickets: state.team1.wickets + 1 }, striker: '' };
+    }
+
+    case 'UPDATE_YET_TO_BAT': {
+      return {
+        ...state,
+        team1: {
+          ...state.team1,
+          batsmanList: updateBatsmanList(state.team1.batsmanList, action.batsmanName),
+        },
+      };
+    }
+
+    case 'SELECT_NEXT_PLAYER': {
+      return { ...state, selectedBatsman: action.name };
+    }
+
+    case 'UPDATE_STRIKER_BATSMAN': {
+      return { ...state, striker: state.selectedBatsman };
     }
 
     default:
