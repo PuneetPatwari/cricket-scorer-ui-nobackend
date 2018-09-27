@@ -26,13 +26,13 @@
     border: 2px solid black;
     display: table;
     margin: 0 auto;
-    margin-top: 32px;
+    margin-top: 16px;
 }
 
 .CurrentBatsman {
   background-color: black;
   color: white;
-  width: 240px;
+  width: 170px;
   height: 100%;
   text-align: center;
   font-size: 18px;
@@ -41,7 +41,7 @@
 .NonStrikeBatsman {
   background-color: white;
   color: black;
-  width: 240px;
+  width: 170px;
   height: 100%;
   text-align: center;
   font-size: 18px;
