@@ -6,8 +6,9 @@ const fetchBowlerStats = (bowlerName, overDetails) => {
     overDetailAcc.totalRunsConceded += runInTHisOver;
     const validBallsInAnOver = over.ballDetails.filter(ball => ball.extra === '').length;
     overDetailAcc.totalOversBowled += calculateTotalOversBowled(validBallsInAnOver);
+    overDetailAcc.totalWicketsTaken += over.ballDetails.filter(ball => ball.batsman === '').length;
     return overDetailAcc;
-  }, { totalRunsConceded: 0, totalMaidenOvers: 0, totalOversBowled: 0 });
+  }, { totalRunsConceded: 0, totalMaidenOvers: 0, totalOversBowled: 0, totalWicketsTaken: 0 });
 };
 
 export default fetchBowlerStats;
