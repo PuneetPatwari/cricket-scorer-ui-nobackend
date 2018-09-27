@@ -46,6 +46,16 @@ const updateYetToBat = batsmanName => ({
   batsmanName,
 });
 
+const setStrikerNonStrikerName = value => ({
+  type: 'SET_STRIKER_NON_STRIKER',
+  value,
+});
+
+const setCurrentBowler = value => ({
+  type: 'SET_CURRENT_BLOWER',
+  value,
+});
+
 const updateSelectedPlayer = batsmanName =>
   (dispatch) => {
     const yetToBatAction = updateYetToBat(batsmanName);
@@ -70,4 +80,6 @@ export {
   updateYetToBat,
   updateStrikerBatsman,
   toggleBatsmanDropDownList,
+  setStrikerNonStrikerName,
+  setCurrentBowler,
 };

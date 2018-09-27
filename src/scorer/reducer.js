@@ -30,39 +30,39 @@ const initialState = {
         yetToBat: false,
       },
       {
-        name: 'Player 3',
+        name: 'Virat',
         yetToBat: true,
       },
       {
-        name: 'Player 4',
+        name: 'Rohit',
         yetToBat: true,
       },
       {
-        name: 'Player 5',
+        name: 'Rahul',
         yetToBat: true,
       },
       {
-        name: 'Player 6',
+        name: 'Ramesh',
         yetToBat: true,
       },
       {
-        name: 'Player 7',
+        name: 'Kapil',
         yetToBat: true,
       },
       {
-        name: 'Player 8',
+        name: 'MS Dhoni',
         yetToBat: true,
       },
       {
-        name: 'Player 9',
+        name: 'Yuvraj',
         yetToBat: true,
       },
       {
-        name: 'Player 10',
+        name: 'Irfan',
         yetToBat: true,
       },
       {
-        name: 'Player 11',
+        name: 'Zaheer',
         yetToBat: true,
       },
     ],
@@ -75,6 +75,41 @@ const initialState = {
     totalScore: 150,
     wickets: 7,
     isInningsCompleted: true,
+    bowllerList: [
+      {
+        name: 'Shoaib',
+      },
+      {
+        name: 'Bret',
+      },
+      {
+        name: 'Shane',
+      },
+      {
+        name: 'Iqbal',
+      },
+      {
+        name: 'Harbhajan',
+      },
+      {
+        name: 'B Kumar',
+      },
+      {
+        name: 'Sohail',
+      },
+      {
+        name: 'Abdul',
+      },
+      {
+        name: 'Razak',
+      },
+      {
+        name: 'Megrath',
+      },
+      {
+        name: 'Murlidharan',
+      },
+    ],
   },
 };
 
@@ -235,6 +270,24 @@ const reducer = function (state = initialState, action) {
 
     case 'UPDATE_STRIKER_BATSMAN': {
       return { ...state, striker: state.selectedBatsman };
+    }
+
+    case 'SET_STRIKER_NON_STRIKER': {
+      const batsmenList = action.value;
+      const strikerName = batsmenList[0].name;
+      const nonStrikerName = batsmenList[1].name;
+      // { ...state, striker: strikerName};
+      // { ...state, nonStriker: nonStrikerName};
+
+      console.warn(batsmenList);
+      return { ...state, striker: strikerName, nonStriker: nonStrikerName };
+    }
+
+    case 'SET_CURRENT_BLOWER': {
+      const bolwersList = action.value;
+
+
+      return { ...state, currentBowler: bolwersList[0].name };
     }
 
     default:

@@ -42,6 +42,14 @@ const reducer = function (state = initialState, action) {
     case 'SET_TEAM2_NAME': {
       return { ...state, team1: { ...state.team2, name: action.value } };
     }
+    case 'SET_BATMENSLIST': {
+      const batmsens = action.value.map(p => p.name);
+      return { ...state, team1Players: batmsens };
+    }
+    case 'SET_BOWLLERSLIST': {
+      const ballers = action.value.map(p => p.name);
+      return { ...state, team2Players: ballers };
+    }
     default:
       return initialState;
   }

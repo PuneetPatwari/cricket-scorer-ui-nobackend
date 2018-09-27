@@ -6,6 +6,9 @@ export const CREATE_GAME = 'CREATE_GAME';
 export const SET_TEAM1_NAME = 'SET_TEAM1_NAME';
 export const SET_TEAM2_NAME = 'SET_TEAM2_NAME';
 export const SET_NUMBER_OF_OVERS = 'SET_NUMBER_OF_OVERS';
+export const SET_BATMENSLIST = 'SET_BATMENSLIST';
+export const SET_BOWLLERSLIST = 'SET_BOWLLERSLIST';
+
 
 export const createGameAction = () => (dispatch) => {
   dispatch({ type: CREATE_GAME });
@@ -26,5 +29,15 @@ export const setTeam2Name = value => ({
 
 export const setNumberOfOvers = value => ({
   type: SET_NUMBER_OF_OVERS,
+  value,
+});
+
+export const setBatmensList = value => ({
+  type: SET_BATMENSLIST,
+  value,
+});
+
+export const setBowllerList = value => ({
+  type: SET_BOWLLERSLIST,
   value,
 });

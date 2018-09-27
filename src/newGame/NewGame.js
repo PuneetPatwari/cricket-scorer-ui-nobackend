@@ -62,7 +62,7 @@ class NewGame extends Component {
                 {/* <Button>Submit Game Details</Button> */}
                 <RLink
                   className="btn btn-primary"
-                  to="/scorer"
+                  to="/playerDetails"
                   onClick={() =>
                     this.props.submitGameDetails(
                       this.state.team1Name,

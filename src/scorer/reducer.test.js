@@ -1,5 +1,13 @@
 import reducer from './reducer';
-import { updateOverDetails, swapBatsman, updateScoreDetails, updateWicket, updateYetToBat } from './actions';
+import {
+  updateOverDetails,
+  swapBatsman,
+  updateScoreDetails,
+  updateWicket,
+  updateYetToBat,
+  setStrikerNonStrikerName,
+  setCurrentBowler,
+} from './actions';
 
 describe('scoreBoardInformation/reducer', () => {
   describe('Modify all relevant states on going for next ball', () => {
@@ -38,39 +46,39 @@ describe('scoreBoardInformation/reducer', () => {
               yetToBat: false,
             },
             {
-              name: 'Player 3',
+              name: 'Virat',
               yetToBat: true,
             },
             {
-              name: 'Player 4',
+              name: 'Rohit',
               yetToBat: true,
             },
             {
-              name: 'Player 5',
+              name: 'Rahul',
               yetToBat: true,
             },
             {
-              name: 'Player 6',
+              name: 'Ramesh',
               yetToBat: true,
             },
             {
-              name: 'Player 7',
+              name: 'Kapil',
               yetToBat: true,
             },
             {
-              name: 'Player 8',
+              name: 'MS Dhoni',
               yetToBat: true,
             },
             {
-              name: 'Player 9',
+              name: 'Yuvraj',
               yetToBat: true,
             },
             {
-              name: 'Player 10',
+              name: 'Irfan',
               yetToBat: true,
             },
             {
-              name: 'Player 11',
+              name: 'Zaheer',
               yetToBat: true,
             },
           ],
@@ -80,6 +88,41 @@ describe('scoreBoardInformation/reducer', () => {
           totalScore: 150,
           wickets: 7,
           isInningsCompleted: true,
+          bowllerList: [
+            {
+              name: 'Shoaib',
+            },
+            {
+              name: 'Bret',
+            },
+            {
+              name: 'Shane',
+            },
+            {
+              name: 'Iqbal',
+            },
+            {
+              name: 'Harbhajan',
+            },
+            {
+              name: 'B Kumar',
+            },
+            {
+              name: 'Sohail',
+            },
+            {
+              name: 'Abdul',
+            },
+            {
+              name: 'Razak',
+            },
+            {
+              name: 'Megrath',
+            },
+            {
+              name: 'Murlidharan',
+            },
+          ],
         },
         toggleBatsmanDropDown: false,
         toggleModal: false,
@@ -348,5 +391,33 @@ describe('Modify state when player is out', () => {
     const updateYetToBatAction = updateYetToBat('Player 11');
     const tempState = reducer(initialState, updateYetToBatAction);
     expect(tempState.team1.batsmanList[10]).toEqual(finalBatsmanState);
+  });
+
+  it('Set striker & non striker', () => {
+    const batsmanList = [
+      {
+        name: 'Rohan',
+        yetToBat: false,
+      },
+      {
+        name: 'Rahul',
+        yetToBat: false,
+      },
+    ];
+    const tempState = reducer(initialState, setStrikerNonStrikerName(batsmanList));
+    expect(tempState.striker).toEqual('Rohan');
+    expect(tempState.nonStriker).toEqual('Rahul');
+  });
+  it('Set current bolwer', () => {
+    const bowllerList = [
+      {
+        name: 'Puneet',
+      },
+      {
+        name: 'Ram',
+      },
+    ];
+    const tempState = reducer(initialState, setCurrentBowler(bowllerList));
+    expect(tempState.currentBowler).toEqual('Puneet');
   });
 });
