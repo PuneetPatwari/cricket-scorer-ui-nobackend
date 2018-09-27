@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Col, Button, Row, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { connect } from 'react-redux';
-import { updateOverDetails, updateScoreDetails, swapBatsman, changeBowlerIfOverCompleted, toggleModal, updateStrikerBatsman, updateWicket } from './actions';
+import { resetSelectedPlayerToBlank, updateOverDetails, updateScoreDetails, swapBatsman, changeBowlerIfOverCompleted, toggleModal, updateStrikerBatsman, updateWicket } from './actions';
 import DropDownModal from '../modal/Modal';
 import './Scorer.css';
 import './BallScore.css';
@@ -17,8 +17,8 @@ class BallScore extends Component {
     };
     this.toggleModal = this.toggleModal.bind(this);
   }
-  onNextBallClick(run, extra) {
-    this.props.handleCurrentBall(run, extra);
+  onNextBallClick(run, extra, selectedBatsman) {
+    this.props.handleCurrentBall(run, extra, selectedBatsman);
     this.resetRun();
     this.resetExtra();
   }
@@ -52,7 +52,7 @@ class BallScore extends Component {
       >
         {'  '}
         {i}{'  '}
-                </Button>);
+      </Button>);
     }
     return (
       <Container className="select-score">
@@ -118,10 +118,16 @@ class BallScore extends Component {
   renderOut() {
     return (
       <Container>
-        <Col style={{ textAlign: 'center' }}>
-          <Button color="danger" onClick={() => handlePlayerOut(this.props)}> Out </Button>
-          <DropDownModal batsman={true} />
-        </Col>
+        {this.props.selectedBatsman == '' ?
+          <Col style={{ textAlign: 'center' }}>
+            <Button color="danger" onClick={() => handlePlayerOut(this.props)}> Out </Button>
+            <DropDownModal batsman={true} />
+          </Col> :
+          <Col style={{ textAlign: 'center' }}>
+            <Button color="danger" disabled={true}> Out </Button>
+            <DropDownModal batsman={true} />
+          </Col>
+        }
       </Container>
     );
   }
@@ -133,8 +139,8 @@ class BallScore extends Component {
           <Button
             outline
             color="primary"
-            onClick={() => this.onNextBallClick(this.state.run, this.state.extra)}
-           // If out is pressed make the batsman empty and do all action for next ball click followed by modal display
+            onClick={() => this.onNextBallClick(this.state.run, this.state.extra, this.props.selectedBatsman)}
+          // If out is pressed make the batsman empty and do all action for next ball click followed by modal display
           >
             Next Ball
           </Button>
@@ -200,20 +206,24 @@ const mapStateToProps = state => ({
   currentBall: state.scoreBoardInformation.team1.ballNumber,
   currentBowler: state.scoreBoardInformation.currentBowler,
   wickets: state.scoreBoardInformation.team1.wickets,
+  selectedBatsman: state.scoreBoardInformation.selectedBatsman,
 });
 
 
 const mapDispatchProps = dispatch => ({
-  handleCurrentBall: (run, extra) => {
+  handleCurrentBall: (run, extra, selectedBatsman) => {
     if (run === -1) {
       alert('Please select the run scored for the ball');
       return;
     }
     dispatch(updateOverDetails(run, extra));
     dispatch(updateScoreDetails(run, extra));
-    dispatch(updateStrikerBatsman());
+    if (selectedBatsman) {
+      dispatch(updateStrikerBatsman());
+    }
     dispatch(swapBatsman(run));
     dispatch(changeBowlerIfOverCompleted);
+    dispatch(resetSelectedPlayerToBlank())
   },
   toggleModal: () => dispatch(toggleModal()),
   updateWicket: () => dispatch(updateWicket()),

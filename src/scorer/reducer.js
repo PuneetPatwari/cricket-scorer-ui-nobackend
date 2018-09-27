@@ -70,7 +70,7 @@ const initialState = {
   },
   toggleBatsmanDropDown: false,
   toggleModal: false,
-  selectedBatsman: 'Sachin',
+  selectedBatsman: '',
   team2: {
     name: 'Team2',
     totalScore: 150,
@@ -246,6 +246,10 @@ const reducer = function (state = initialState, action) {
 
     case 'UPDATE_STRIKER_BATSMAN': {
       return { ...state, striker: state.selectedBatsman };
+    }
+
+    case 'RESET_SELECTED_PLAYER_TO_BLANK': {
+      return { ...state, selectedBatsman: '' };
     }
 
     default:

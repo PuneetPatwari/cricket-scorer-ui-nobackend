@@ -62,6 +62,18 @@ const updateSelectedPlayer = batsmanName =>
     dispatch(toggleModalObj);
   };
 
+const resetSelectedPlayerToBlank = () => ({
+  type: 'RESET_SELECTED_PLAYER_TO_BLANK',
+});
+
+const resetModalStatesForBatsman = () =>
+  (dispatch) => {
+    const toggleModalObj = toggleModal();
+    dispatch(toggleModalObj);
+    const resetSelectedPlayerToBlankObj = resetSelectedPlayerToBlank();
+    dispatch(resetSelectedPlayerToBlankObj);
+  };
+
 export {
   updateOverDetails,
   updateScoreDetails,
@@ -75,4 +87,6 @@ export {
   updateStrikerBatsman,
   toggleBatsmanDropDownList,
   changeBowlerIfOverCompleted,
+  resetModalStatesForBatsman,
+  resetSelectedPlayerToBlank,
 };
