@@ -18,4 +18,4 @@ const runReducer = (acc, ballDetails) => {
   return acc;
 };
 
-const calculateTotalOversBowled = totalBalls => totalBalls === 6 ? 1 : ((totalBalls % 6) / 10);
+const calculateTotalOversBowled = totalBalls => (totalBalls === 6 ? 1 : ((totalBalls % 6) / 10));

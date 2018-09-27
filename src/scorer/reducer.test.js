@@ -1,5 +1,5 @@
 import reducer from './reducer';
-import { updateOverDetails, swapBatsman, updateScoreDetails } from './actions';
+import { updateOverDetails, swapBatsman, updateScoreDetails, updateWicket, updateYetToBat } from './actions';
 
 describe('scoreBoardInformation/reducer', () => {
   describe('Modify all relevant states on going for next ball', () => {
@@ -43,7 +43,7 @@ describe('scoreBoardInformation/reducer', () => {
             },
             {
               name: 'Player 4',
-              yetToBat: false,
+              yetToBat: true,
             },
             {
               name: 'Player 5',
@@ -89,6 +89,8 @@ describe('scoreBoardInformation/reducer', () => {
         },
         toggleBatsmanDropDown: false,
         showBatsmanList: false,
+        toggleModal: false,
+        selectedBatsman: 'Sachin',
       };
     });
 
@@ -244,5 +246,114 @@ describe('scoreBoardInformation/reducer', () => {
       const tempState = reducer(initialState, updateScoreDetails(0, 'LB'));
       expect(tempState.team1.ballNumber).toEqual(finalBallNumber);
     });
+  });
+});
+
+describe('Modify state when player is out', () => {
+  let initialState;
+  beforeEach(() => {
+    initialState = {
+      overDetails: [
+        {
+          bowler: 'Lee',
+          ballDetails: [
+            { batsman: 'Sachin', runs: 0, extra: '' },
+            { batsman: 'Sachin', runs: 4, extra: '' },
+          ],
+        },
+      ],
+      striker: 'Sachin',
+      nonStriker: 'Sehwag',
+      // Will get from Story 2
+      currentBowler: 'Lee',
+      currentOver: ['0', '4'],
+      // Team1 and Team2 will get from Story 1
+      team1: {
+        totalScore: 0,
+        wickets: 0,
+        overNumber: 0,
+        ballNumber: 2,
+        isInningsCompleted: false,
+        batsmanList: [
+          {
+            name: 'Sachin',
+            yetToBat: false,
+          },
+          {
+            name: 'Sehwag',
+            yetToBat: false,
+          },
+          {
+            name: 'Player 3',
+            yetToBat: true,
+          },
+          {
+            name: 'Player 4',
+            yetToBat: true,
+          },
+          {
+            name: 'Player 5',
+            yetToBat: true,
+          },
+          {
+            name: 'Player 6',
+            yetToBat: true,
+          },
+          {
+            name: 'Player 7',
+            yetToBat: true,
+          },
+          {
+            name: 'Player 8',
+            yetToBat: true,
+          },
+          {
+            name: 'Player 9',
+            yetToBat: true,
+          },
+          {
+            name: 'Player 10',
+            yetToBat: true,
+          },
+          {
+            name: 'Player 11',
+            yetToBat: true,
+          },
+        ],
+      },
+      toggleBatsmanDropDown: false,
+      toggleModal: false,
+      selectedBatsman: 'Sachin',
+      team2: {
+        totalScore: 150,
+        wickets: 7,
+        isInningsCompleted: true,
+      },
+    };
+  });
+  it('Update wicket and reset striker', () => {
+    const finalWicketState = 1;
+    const updateWicketAction = updateWicket();
+    const tempState = reducer(initialState, updateWicketAction);
+    expect(tempState.team1.wickets).toEqual(finalWicketState);
+    expect(tempState.striker).toEqual('');
+  });
+  it('Update yet to bat property for player', () => {
+    const finalBatsmanState = {
+      name: 'Player 3',
+      yetToBat: false,
+    };
+    const updateYetToBatAction = updateYetToBat('Player 3');
+    const tempState = reducer(initialState, updateYetToBatAction);
+    expect(tempState.team1.batsmanList[2]).toEqual(finalBatsmanState);
+  });
+  it('Update yet to bat property for last player', () => {
+    const finalBatsmanState = {
+      name: 'Player 11',
+      yetToBat: false,
+    };
+    const updateYetToBatAction = updateYetToBat('Player 11');
+    const tempState = reducer(initialState, updateYetToBatAction);
+    expect(tempState.team1.batsmanList[10]).toEqual(finalBatsmanState);
   });
 });

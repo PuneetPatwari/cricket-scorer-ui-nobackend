@@ -30,8 +30,6 @@ describe('gameInformation/reducer', () => {
         'Player2.11',
       ],
       numberOfOvers: 5,
-      currentOverDetails: ['1', '2', 'Wd', '0', '4'],
-      currentBowler: 'Player2.1',
     };
     expect(reducer(undefined, {})).toEqual(initialState);
   });

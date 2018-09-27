@@ -13,28 +13,23 @@ const teamScore = (team, totalNumberOfOvers) => {
 
 const ScoreBoard = props => (
   <Container>
-    <br />
     <Row>
-      <Col md={{ size: 6, offset: 0 }}>
-        <Row>
-          <Col md="5" xs="4">
-            <h3>
-              {' '}
-              <b>{props.team1.name}</b>{' '}
-            </h3>
-          </Col>
-          <Col sm="1" xs="1" />
-          <Col style={{ textAlign: 'left' }}>
-            <h3>
-              {' '}
-              <b>{teamScore(props.team1, props.numberOfOvers)}</b>{' '}
-            </h3>
-          </Col>
-        </Row>
+      <Col md="1">
+        <h3>
+          {' '}
+          <b>{props.team1.name}</b>{' '}
+        </h3>
+      </Col>
+      <Col />
+      <Col md="auto">
+        <h3>
+          {' '}
+          <b>{teamScore(props.team1, props.numberOfOvers)}</b>{' '}
+        </h3>
       </Col>
     </Row>
     <br />
-    <Row>
+    {/* <Row>
       <Col md={{ size: 6, offset: 0 }} sm="12">
         <Row>
           <Col>
@@ -44,6 +39,21 @@ const ScoreBoard = props => (
             </h5>
           </Col>
         </Row>
+      </Col>
+    </Row> */}
+    <Row>
+      <Col md="1">
+        <h5>
+          {' '}
+          {props.team2.name}{' '}
+        </h5>
+      </Col>
+      <Col />
+      <Col md="auto">
+        <h5>
+          {' '}
+          {teamScore(props.team2, props.numberOfOvers)}{' '}
+        </h5>
       </Col>
     </Row>
   </Container>
