@@ -4,9 +4,9 @@ const initialState = {
       bowler: 'Lee',
       ballDetails: [
         { batsman: 'Sachin', runs: 0, extra: '' },
-        { batsman: 'Sachin', runs: 4, extra: '' },
-      ],
-    },
+        { batsman: 'Sachin', runs: 4, extra: '' }
+      ]
+    }
   ],
   showBatsmanList: false,
   striker: 'Sachin',
@@ -24,49 +24,49 @@ const initialState = {
     batsmanList: [
       {
         name: 'Sachin',
-        yetToBat: false,
+        yetToBat: false
       },
       {
         name: 'Sehwag',
-        yetToBat: false,
+        yetToBat: false
       },
       {
         name: 'Virat',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Rohit',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Rahul',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Ramesh',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Kapil',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'MS Dhoni',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Yuvraj',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Irfan',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Zaheer',
-        yetToBat: true,
-      },
-    ],
+        yetToBat: true
+      }
+    ]
   },
   toggleBatsmanDropDown: false,
   toggleModal: false,
@@ -76,42 +76,42 @@ const initialState = {
     totalScore: 150,
     wickets: 7,
     isInningsCompleted: true,
-    bowllerList: [
+    bowlerList: [
       {
-        name: 'Shoaib',
+        name: 'Shoaib'
       },
       {
-        name: 'Bret',
+        name: 'Bret'
       },
       {
-        name: 'Shane',
+        name: 'Shane'
       },
       {
-        name: 'Iqbal',
+        name: 'Iqbal'
       },
       {
-        name: 'Harbhajan',
+        name: 'Harbhajan'
       },
       {
-        name: 'B Kumar',
+        name: 'B Kumar'
       },
       {
-        name: 'Sohail',
+        name: 'Sohail'
       },
       {
-        name: 'Abdul',
+        name: 'Abdul'
       },
       {
-        name: 'Razak',
+        name: 'Razak'
       },
       {
-        name: 'Megrath',
+        name: 'Megrath'
       },
       {
-        name: 'Murlidharan',
-      },
-    ],
-  },
+        name: 'Murlidharan'
+      }
+    ]
+  }
 };
 
 const updateBatsmanList = (batsmanList, batsmanName) => {
@@ -121,26 +121,26 @@ const updateBatsmanList = (batsmanList, batsmanName) => {
     newBatsmanList = [
       {
         name: batsmanName,
-        yetToBat: false,
+        yetToBat: false
       },
-      ...batsmanList.slice(index + 1),
+      ...batsmanList.slice(index + 1)
     ];
   } else if (index === batsmanList.length - 1) {
     newBatsmanList = [
       ...batsmanList.slice(0, index),
       {
         name: batsmanName,
-        yetToBat: false,
-      },
+        yetToBat: false
+      }
     ];
   } else {
     newBatsmanList = [
       ...batsmanList.slice(0, index),
       {
         name: batsmanName,
-        yetToBat: false,
+        yetToBat: false
       },
-      ...batsmanList.slice(index + 1),
+      ...batsmanList.slice(index + 1)
     ];
   }
   return newBatsmanList;
@@ -168,8 +168,8 @@ const reducer = function (state = initialState, action) {
           ...state.team1,
           totalScore: state.team1.totalScore + action.runs + extraRun,
           ballNumber: currentBallNumber,
-          overNumber: currentOverNumber,
-        },
+          overNumber: currentOverNumber
+        }
       };
     }
 
@@ -183,9 +183,9 @@ const reducer = function (state = initialState, action) {
             ...state.overDetails,
             {
               bowler: state.currentBowler,
-              ballDetails: [{ batsman: state.striker, runs: action.runs, extra: currentExtra }],
-            },
-          ],
+              ballDetails: [{ batsman: state.striker, runs: action.runs, extra: currentExtra }]
+            }
+          ]
         };
       }
       return {
@@ -197,10 +197,10 @@ const reducer = function (state = initialState, action) {
             ballDetails: [
               ...state.overDetails[state.team1.overNumber].ballDetails,
               // Check extra field befre adding score for batsman later
-              { batsman: state.striker, runs: action.runs, extra: currentExtra },
-            ],
-          },
-        ],
+              { batsman: state.striker, runs: action.runs, extra: currentExtra }
+            ]
+          }
+        ]
       };
     }
 
@@ -227,8 +227,8 @@ const reducer = function (state = initialState, action) {
         ...state,
         team1: {
           ...state.team1,
-          name: action.value,
-        },
+          name: action.value
+        }
       };
     }
 
@@ -238,8 +238,8 @@ const reducer = function (state = initialState, action) {
         ...state,
         team2: {
           ...state.team2,
-          name: action.value,
-        },
+          name: action.value
+        }
       };
     }
 
@@ -260,8 +260,8 @@ const reducer = function (state = initialState, action) {
         ...state,
         team1: {
           ...state.team1,
-          batsmanList: updateBatsmanList(state.team1.batsmanList, action.batsmanName),
-        },
+          batsmanList: updateBatsmanList(state.team1.batsmanList, action.batsmanName)
+        }
       };
     }
 
@@ -293,7 +293,7 @@ const reducer = function (state = initialState, action) {
     }
 
     default:
-      return initialState;
+      return state;
   }
 };
 

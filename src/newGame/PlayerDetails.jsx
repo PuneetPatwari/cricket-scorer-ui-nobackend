@@ -12,7 +12,7 @@ class PlayerDetails extends Component {
     super(props);
     this.state = {
       batsmanList: [],
-      bowllerList: [],
+      bowlerList: [],
     };
   }
   setBatsmenName(value, index) {
@@ -20,7 +20,7 @@ class PlayerDetails extends Component {
   }
   setBallerName(value, index) {
     // debugger;
-    this.state.bowllerList[index].name = value;
+    this.state.bowlerList[index].name = value;
   }
   displayBatsmenDetails() {
     this.state.batsmanList = this.props.batsmanList;
@@ -48,9 +48,9 @@ class PlayerDetails extends Component {
   }
 
   displayBowlerDetails() {
-    this.state.bowllerList = this.props.bowllerList;
+    this.state.bowlerList = this.props.bowlerList;
     const rows = [];
-    this.props.bowllerList.forEach((element, index) => {
+    this.props.bowlerList.forEach((element, index) => {
       rows.push(<Row>
         <Col>
           <tr>
@@ -99,7 +99,7 @@ class PlayerDetails extends Component {
             className="btn btn-primary"
             to="/scorer"
             onClick={() =>
-              this.props.submitPlayerDetails(this.state.batsmanList, this.state.bowllerList)
+              this.props.submitPlayerDetails(this.state.batsmanList, this.state.bowlerList)
             }
           >
             {' '}
@@ -112,19 +112,19 @@ class PlayerDetails extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  submitPlayerDetails: (batsmanList, bowllerList) => {
+  submitPlayerDetails: (batsmanList, bowlerList) => {
     dispatch(setBatmensList(batsmanList));
-    dispatch(setBowllerList(bowllerList));
+    dispatch(setBowllerList(bowlerList));
     dispatch(setStrikerNonStrikerName(batsmanList));
-    dispatch(setCurrentBowler(bowllerList));
+    dispatch(setCurrentBowler(bowlerList));
   },
 });
 
 const mapStateToProps = state => ({
   batsmanList: state.scoreBoardInformation.team1.batsmanList,
-  bowllerList: state.scoreBoardInformation.team2.bowllerList,
+  bowlerList: state.scoreBoardInformation.team2.bowlerList,
   // batsmanListGame: state.gameInformationReducer.team1Players,
-  // bowllerListGame: state.gameInformationReducer.team2Players,
+  // bowlerListGame: state.gameInformationReducer.team2Players,
 });
 
 const connectPlayerDetails = connect(

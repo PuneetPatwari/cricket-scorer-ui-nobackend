@@ -7,18 +7,20 @@ import fetchBowlerStats from './FetchBowlerStats';
 class BowlerStats extends Component {
   displayBowlerDetails() {
     const rows = [];
-    if(this.props.bowlerList !== undefined) {
+    if (this.props.bowlerList !== undefined) {
       const bowlersList = this.props.bowlerList;
       for (let i = 0; i < bowlersList.length; i += 1) {
         const bowlerStats = fetchBowlerStats(bowlersList[i].name, this.props.overDetails);
-        rows.push(<tr>
-          <th scope="row">{i + 1}</th>
-          <td>{bowlersList[i].name}</td>
-          <td>{bowlerStats.totalOversBowled}</td>
-          <td>{bowlerStats.totalMaidenOvers}</td>
-          <td>{bowlerStats.totalRunsConceded}</td>
-          <td>{bowlerStats.totalWicketsTaken}</td>
-                  </tr>);
+        if (bowlerStats.totalOversBowled !== 0) {
+          rows.push(<tr>
+            <th scope="row">{i + 1}</th>
+            <td>{bowlersList[i].name}</td>
+            <td>{bowlerStats.totalOversBowled}</td>
+            <td>{bowlerStats.totalMaidenOvers}</td>
+            <td>{bowlerStats.totalRunsConceded}</td>
+            <td>{bowlerStats.totalWicketsTaken}</td>
+                    </tr>);
+        }
       }
     }
     return rows;
@@ -27,8 +29,8 @@ class BowlerStats extends Component {
   render() {
     return (
       <div>
-          <h3>Bowling Table</h3>
-          <Table>
+        <h3>Bowling Table</h3>
+        <Table>
           <thead>
             <tr>
               <th>#</th>
@@ -39,18 +41,16 @@ class BowlerStats extends Component {
               <th>Wickets</th>
             </tr>
           </thead>
-          <tbody>
-            {this.displayBowlerDetails()}
-          </tbody>
+          <tbody>{this.displayBowlerDetails()}</tbody>
         </Table>
-        </div>
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
   overDetails: state.scoreBoardInformation.overDetails,
-  bowlerList: state.scoreBoardInformation.team2.bowlerList,
+  bowlerList: state.scoreBoardInformation.team2.bowlerList
 });
 
 export default connect(mapStateToProps)(BowlerStats);

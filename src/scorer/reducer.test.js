@@ -91,7 +91,7 @@ describe('scoreBoardInformation/reducer', () => {
           totalScore: 150,
           wickets: 7,
           isInningsCompleted: true,
-          bowllerList: [
+          bowlerList: [
             {
               name: 'Shoaib'
             },
@@ -419,7 +419,7 @@ describe('Modify state when player is out', () => {
     expect(tempState.nonStriker).toEqual('Rahul');
   });
   it('Set current bolwer', () => {
-    const bowllerList = [
+    const bowlerList = [
       {
         name: 'Puneet'
       },
@@ -427,7 +427,7 @@ describe('Modify state when player is out', () => {
         name: 'Ram'
       }
     ];
-    const tempState = reducer(initialState, setCurrentBowler(bowllerList));
+    const tempState = reducer(initialState, setCurrentBowler(bowlerList));
     expect(tempState.currentBowler).toEqual('Puneet');
   });
   it('Update selected player when player is selcted from dropdown', () => {
