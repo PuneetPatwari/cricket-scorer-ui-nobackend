@@ -43,7 +43,7 @@ const reducer = function (state = initialState, action) {
       return { ...state, team1: { ...state.team2, name: action.value } };
     }
     default:
-      return initialState;
+      return state;
   }
 };
 
