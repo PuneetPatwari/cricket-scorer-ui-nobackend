@@ -130,7 +130,7 @@ class BallScore extends Component {
   renderOut() {
     return (
       <Container>
-        {this.props.selectedBatsman == '' ?
+        {this.props.selectedBatsman === '' ?
           <Col style={{ textAlign: 'center' }}>
             <Button color="danger" onClick={() => handlePlayerOut(this.props)}> Out </Button>
             <DropDownModal batsman={true} />

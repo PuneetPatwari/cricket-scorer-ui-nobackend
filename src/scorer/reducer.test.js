@@ -132,14 +132,13 @@ describe('scoreBoardInformation/reducer', () => {
       toggleModal: false,
       selectedBatsman: '',
       toggleBowlerDropDown: false,
-      selectedBowler: '',
-      selectedBatsman: 'Sachin',
+      selectedBowler: ''
     };
   });
 
   describe('Modify all relevant states on going for next ball', () => {
     it('should return initial state each team', () => {
-      expect(reducer(undefined, {})).toEqual(initialState);
+      expect(reducer(initialState, {})).toEqual(initialState);
     });
 
     it('Add 4 runs on Over 0.3 for Sachin', () => {

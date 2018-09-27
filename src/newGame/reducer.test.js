@@ -1,6 +1,5 @@
 import reducer from './reducer';
-import { setBatmensList, setBowllerList } from './actions';
-import { setNumberOfOvers } from './actions';
+import { setBatmensList, setBowllerList, setNumberOfOvers } from './actions';
 
 describe('gameInformation/reducer', () => {
   let initialState;
@@ -17,7 +16,7 @@ describe('gameInformation/reducer', () => {
         'Player1.8',
         'Player1.9',
         'Player1.10',
-        'Player1.11',
+        'Player1.11'
       ],
       team2Players: [
         'Lee',
@@ -30,9 +29,9 @@ describe('gameInformation/reducer', () => {
         'Player2.8',
         'Player2.9',
         'Player2.10',
-        'Player2.11',
+        'Player2.11'
       ],
-      numberOfOvers: 2,
+      numberOfOvers: 2
     };
   });
   it('should return initial state of 11 players in each team', () => {
@@ -42,48 +41,48 @@ describe('gameInformation/reducer', () => {
     const batsmanList = [
       {
         name: 'Sachin',
-        yetToBat: false,
+        yetToBat: false
       },
       {
         name: 'Sehwag',
-        yetToBat: false,
+        yetToBat: false
       },
       {
         name: 'Virat',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Rohit',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Rahul',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Ramesh',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Kapil',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'MS Dhoni',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Yuvraj',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Irfan',
-        yetToBat: true,
+        yetToBat: true
       },
       {
         name: 'Zaheer',
-        yetToBat: true,
-      },
+        yetToBat: true
+      }
     ];
     const tempState = reducer(initialState, setBatmensList(batsmanList));
     expect(tempState.team1Players[0]).toEqual('Sachin');
@@ -93,45 +92,46 @@ describe('gameInformation/reducer', () => {
   it('updating the bolwer list', () => {
     const bolwerList = [
       {
-        name: 'Akshay',
+        name: 'Akshay'
       },
       {
-        name: 'Puneet',
+        name: 'Puneet'
       },
       {
-        name: 'Virat',
+        name: 'Virat'
       },
       {
-        name: 'Rohit',
+        name: 'Rohit'
       },
       {
-        name: 'Rahul',
+        name: 'Rahul'
       },
       {
-        name: 'Ramesh',
+        name: 'Ramesh'
       },
       {
-        name: 'Kapil',
+        name: 'Kapil'
       },
       {
-        name: 'MS Dhoni',
+        name: 'MS Dhoni'
       },
       {
-        name: 'Yuvraj',
+        name: 'Yuvraj'
       },
       {
-        name: 'Irfan',
+        name: 'Irfan'
       },
       {
-        name: 'Zaheer',
-      },
+        name: 'Zaheer'
+      }
     ];
     const tempState = reducer(initialState, setBowllerList(bolwerList));
     expect(tempState.team2Players[0]).toEqual('Akshay');
     expect(tempState.team2Players[1]).toEqual('Puneet');
 
-  it('Set over for match to 10', () => {
-    const tempState = reducer(initialState, setNumberOfOvers(10));
-    expect(tempState.numberOfOvers).toEqual(10);
+    it('Set over for match to 10', () => {
+      const tempState1 = reducer(initialState, setNumberOfOvers(10));
+      expect(tempState1.numberOfOvers).toEqual(10);
+    });
   });
 });

@@ -71,7 +71,6 @@ const initialState = {
   toggleModal: false,
   selectedBatsman: '',
   selectedBowler: '',
-  selectedBatsman: 'Sachin',
   toggleBowlerDropDown: false,
   team2: {
     name: 'Team2',
@@ -281,7 +280,7 @@ const reducer = function (state = initialState, action) {
         ...state,
         currentBowler: action.value,
         selectedBowler: '',
-        toggleModal: !state.toggleModal,
+        toggleModal: !state.toggleModal
       };
     }
 
