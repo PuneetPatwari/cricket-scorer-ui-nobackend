@@ -10,9 +10,21 @@
     "jest": true,
     "browser": true
   },
-  "plugins": ["jest"],
+  "plugins": [
+    "jest"
+  ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/prop-types": 0
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/prop-types": 0,
+    "no-use-before-define": 0,
+    "comma-dangle": 0
   }
 }

@@ -8,12 +8,12 @@ class BowlerStats extends Component {
   displayBowlerDetails() {
     const rows = [];
     if(this.props.bowlerList !== undefined) {
-      const filteredBowlerList = this.props.bowlerList.filter(b => !b.yetToBowl);
-      for (let i = 0; i < filteredBowlerList.length; i += 1) {
-        const bowlerStats = fetchBowlerStats(filteredBowlerList[i].name, this.props.overDetails);
+      const bowlersList = this.props.bowlerList;
+      for (let i = 0; i < bowlersList.length; i += 1) {
+        const bowlerStats = fetchBowlerStats(bowlersList[i].name, this.props.overDetails);
         rows.push(<tr>
           <th scope="row">{i + 1}</th>
-          <td>{filteredBowlerList[i].name}</td>
+          <td>{bowlersList[i].name}</td>
           <td>{bowlerStats.totalOversBowled}</td>
           <td>{bowlerStats.totalMaidenOvers}</td>
           <td>{bowlerStats.totalRunsConceded}</td>
