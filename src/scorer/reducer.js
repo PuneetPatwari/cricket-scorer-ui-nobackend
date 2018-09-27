@@ -71,6 +71,7 @@ const initialState = {
   toggleBatsmanDropDown: false,
   toggleModal: false,
   selectedBatsman: '',
+  toggleBowlerDropDown: false,
   team2: {
     name: 'Team2',
     totalScore: 150,
@@ -222,7 +223,6 @@ const reducer = function (state = initialState, action) {
     }
 
     case 'SET_TEAM1_NAME': {
-      console.log(state);
       return {
         ...state,
         team1: {
@@ -233,7 +233,6 @@ const reducer = function (state = initialState, action) {
     }
 
     case 'SET_TEAM2_NAME': {
-      console.log(state);
       return {
         ...state,
         team2: {
@@ -271,6 +270,13 @@ const reducer = function (state = initialState, action) {
 
     case 'UPDATE_STRIKER_BATSMAN': {
       return { ...state, striker: state.selectedBatsman };
+    }
+    case 'CHANGE_CURRENT_BOWLER': {
+      return { ...state, currentBowler: action.value };
+    }
+
+    case 'TOGGLE_BOWLER_DROPDOWN': {
+      return { ...state, toggleBowlerDropDown: !state.toggleBowlerDropDown };
     }
 
     case 'SET_STRIKER_NON_STRIKER': {

@@ -1,5 +1,6 @@
 import reducer from './reducer';
 import { setBatmensList, setBowllerList } from './actions';
+import { setNumberOfOvers } from './actions';
 
 describe('gameInformation/reducer', () => {
   let initialState;
@@ -19,7 +20,7 @@ describe('gameInformation/reducer', () => {
         'Player1.11',
       ],
       team2Players: [
-        'Player2.1',
+        'Lee',
         'Player2.2',
         'Player2.3',
         'Player2.4',
@@ -128,5 +129,9 @@ describe('gameInformation/reducer', () => {
     const tempState = reducer(initialState, setBowllerList(bolwerList));
     expect(tempState.team2Players[0]).toEqual('Akshay');
     expect(tempState.team2Players[1]).toEqual('Puneet');
+
+  it('Set over for match to 10', () => {
+    const tempState = reducer(initialState, setNumberOfOvers(10));
+    expect(tempState.numberOfOvers).toEqual(10);
   });
 });

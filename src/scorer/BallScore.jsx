@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
-import { Container, Col, Button, Row, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {
+  Container,
+  Col,
+  Button,
+  Row,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from 'reactstrap';
 import { connect } from 'react-redux';
 import { resetSelectedPlayerToBlank, updateOverDetails, updateScoreDetails, swapBatsman, changeBowlerIfOverCompleted, toggleModal, updateStrikerBatsman, updateWicket } from './actions';
 import DropDownModal from '../modal/Modal';
 import './Scorer.css';
 import './BallScore.css';
+import SelectBowler from './SelectBowler';
 
 class BallScore extends Component {
   constructor(props) {
@@ -43,16 +53,18 @@ class BallScore extends Component {
   renderRuns() {
     const rows = [];
     for (let i = 0; i < 8; i += 1) {
-      rows.push(<Button
-        className={`run-button ${i === this.state.run ? 'bg-blue' : ''}`}
-        key={i}
-        value={i}
-        onClick={event => this.setRun(event)}
-        color="primary"
-      >
-        {'  '}
-        {i}{'  '}
-      </Button>);
+      rows.push(
+        <Button
+          className={`run-button ${i === this.state.run ? 'bg-blue' : ''}`}
+          key={i}
+          value={i}
+          onClick={event => this.setRun(event)}
+          color="primary"
+        >
+          {'  '}
+          {i}
+          {'  '}
+        </Button>);
     }
     return (
       <Container className="select-score">
@@ -71,7 +83,7 @@ class BallScore extends Component {
       <Container>
         <Container>
           <Row>
-            <Col style={{ textAlign: 'left' }} >
+            <Col style={{ textAlign: 'left' }}>
               <h5> Extras: </h5>
             </Col>
           </Row>
@@ -110,7 +122,6 @@ class BallScore extends Component {
             LB
           </Button>
         </Container>
-
       </Container>
     );
   }
@@ -139,8 +150,7 @@ class BallScore extends Component {
           <Button
             outline
             color="primary"
-            onClick={() => this.onNextBallClick(this.state.run, this.state.extra, this.props.selectedBatsman)}
-          // If out is pressed make the batsman empty and do all action for next ball click followed by modal display
+            onClick={() => this.onNextBallClick(this.state.run, this.state.extra)}
           >
             Next Ball
           </Button>
@@ -153,24 +163,33 @@ class BallScore extends Component {
     if (this.state.isOut) {
       return (
         <div>
-          <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+          <Modal
+            isOpen={this.state.modal}
+            toggle={this.toggleModal}
+            className={this.props.className}
+          >
             <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader>
             <ModalBody>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.toggleModal}>Do Something</Button>{' '}
-              <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
+              <Button color="primary" onClick={this.toggleModal}>
+                Do Something
+              </Button>{' '}
+              <Button color="secondary" onClick={this.toggleModal}>
+                Cancel
+              </Button>
             </ModalFooter>
           </Modal>
         </div>
-
       );
     }
-    return (
-      <div />
-    );
+    return <div />;
   }
   render() {
     return (
@@ -183,6 +202,7 @@ class BallScore extends Component {
         <br />
         {this.renderNextBall()}
         {this.renderModalForNextBowler()}
+        <SelectBowler />
         {/* <button onClick={() => this.onNextBallClick(this.state.run)}>Next ball</button> */}
       </div>
     );

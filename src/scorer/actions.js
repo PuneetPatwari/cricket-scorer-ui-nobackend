@@ -83,6 +83,14 @@ const resetModalStatesForBatsman = () =>
     const resetSelectedPlayerToBlankObj = resetSelectedPlayerToBlank();
     dispatch(resetSelectedPlayerToBlankObj);
   };
+const changeCurrentBowler = value => ({
+  type: 'CHANGE_CURRENT_BOWLER',
+  value,
+});
+
+const toggleBowlerDropDownList = () => ({
+  type: 'TOGGLE_BOWLER_DROPDOWN',
+});
 
 export {
   updateOverDetails,
@@ -101,4 +109,6 @@ export {
   changeBowlerIfOverCompleted,
   resetModalStatesForBatsman,
   resetSelectedPlayerToBlank,
+  changeCurrentBowler,
+  toggleBowlerDropDownList,
 };
