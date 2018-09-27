@@ -17,10 +17,14 @@ class BatsmenStats extends Component {
           this.props.striker, this.props.nonStriker,
         ),
         runs: calcBatsmenRuns(batsmanList[playersIndex].name, this.props.overDetails),
-        balls: calcBatsmenBalls(batsmanList[playersIndex].name, this.props.overDetails),
         foursAndSixs:
         calcBatsmen4sand6sBalls(batsmanList[playersIndex].name, this.props.overDetails),
       };
+      batsmen.balls = calcBatsmenBalls(
+        batsmanList[playersIndex].name,
+        this.props.overDetails, batsmen.isStrikerOrNonStriker,
+      );
+
       rows.push((
         <tr>
           <th scope="row">{playersIndex + 1}</th>

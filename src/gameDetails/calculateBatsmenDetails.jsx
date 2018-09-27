@@ -12,13 +12,14 @@ const calcBatsmenRuns = function (name, overDetails) {
   return runs;
 };
 
-const calcBatsmenBalls = function (name, overDetails) {
+const calcBatsmenBalls = function (name, overDetails, isBatsmenOnStrike) {
   let balls = 0;
   overDetails.forEach((over) => {
     over.ballDetails.forEach((ball) => {
       balls += ball.batsman === name ? 1 : 0;
     });
   });
+  balls += isBatsmenOnStrike ? 0 : 1;
   return balls;
 };
 
@@ -38,7 +39,8 @@ const calcStrikeRate = function (totalRuns, totalBalls) {
   if (totalRuns === 0 || totalBalls === 0) {
     return 0;
   }
-  const strikeRate = (totalRuns / totalBalls) * 100;
+  let strikeRate = (totalRuns / totalBalls) * 100;
+  strikeRate = Number.isInteger(strikeRate) ? strikeRate : Number(strikeRate.toFixed(2));
   return strikeRate;
 };
 
