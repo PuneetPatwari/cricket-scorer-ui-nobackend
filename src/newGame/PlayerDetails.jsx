@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import RLink from 'react-router-dom/Link';
 import { setBatmensList, setBowllerList } from './actions';
 import { setCurrentBowler, setStrikerNonStrikerName } from '../scorer/actions';
+import '../style.css';
 
 class PlayerDetails extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class PlayerDetails extends Component {
             </td>
           </tr>
         </Col>
-      </Row>);
+                </Row>);
     });
     return rows;
   }
@@ -69,44 +70,48 @@ class PlayerDetails extends Component {
             </td>
           </tr>
         </Col>
-      </Row>);
+                </Row>);
     });
     return rows;
   }
 
   render() {
     return (
-      <Container>
-        <br />
-        <center>
-          <h2> Player Details</h2>
-        </center>
-        <br />
-        <br />
-        <br />
-        <Row>
-          <Col>
-            <form>{this.displayBatsmenDetails()}</form>
-          </Col>
-          <Col>
-            <form>{this.displayBowlerDetails()}</form>
-          </Col>
-        </Row>
-        <br />
-        <br />
-        <center>
-          <RLink
-            className="btn btn-primary"
-            to="/scorer"
-            onClick={() =>
-              this.props.submitPlayerDetails(this.state.batsmanList, this.state.bowlerList)
-            }
-          >
-            {' '}
-            Submit Player Details{' '}
-          </RLink>{' '}
-        </center>
-      </Container>
+      <div className="outermost-cotainer">
+        <div className="inner-container">
+          <Container>
+            <br />
+            <center>
+              <h2> Player Details</h2>
+            </center>
+            <br />
+            <br />
+            <br />
+            <Row>
+              <Col>
+                <form>{this.displayBatsmenDetails()}</form>
+              </Col>
+              <Col>
+                <form>{this.displayBowlerDetails()}</form>
+              </Col>
+            </Row>
+            <br />
+            <br />
+            <center>
+              <RLink
+                className="btn btn-primary"
+                to="/scorer"
+                onClick={() =>
+                  this.props.submitPlayerDetails(this.state.batsmanList, this.state.bowlerList)
+                }
+              >
+                {' '}
+                Submit Player Details{' '}
+              </RLink>{' '}
+            </center>
+          </Container>
+        </div>
+      </div>
     );
   }
 }
