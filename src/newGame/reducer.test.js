@@ -19,17 +19,17 @@ describe('gameInformation/reducer', () => {
         'Player1.11'
       ],
       team2Players: [
-        'Lee',
-        'Player2.2',
-        'Player2.3',
-        'Player2.4',
-        'Player2.5',
-        'Player2.6',
-        'Player2.7',
-        'Player2.8',
-        'Player2.9',
-        'Player2.10',
-        'Player2.11'
+        'Shoaib',
+        'Bret',
+        'Shane',
+        'Iqbal',
+        'Harbhajan',
+        'B Kumar',
+        'Sohail',
+        'Abdul',
+        'Razak',
+        'Megrath',
+        'Murlidharan'
       ],
       numberOfOvers: 3
     };
