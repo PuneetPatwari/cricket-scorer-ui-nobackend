@@ -9,133 +9,136 @@ import {
   setCurrentBowler,
   selectNextPlayer,
   updateStrikerBatsman,
-  resetSelectedPlayerToBlank
+  resetSelectedPlayerToBlank,
+  changeCurrentBowler
 } from './actions';
+import { setTeam1Name, setTeam2Name } from '../newGame/actions';
 
 describe('scoreBoardInformation/reducer', () => {
-  describe('Modify all relevant states on going for next ball', () => {
-    let initialState;
-    beforeEach(() => {
-      initialState = {
-        overDetails: [
+  let initialState;
+  beforeEach(() => {
+    initialState = {
+      overDetails: [
+        {
+          bowler: 'Shoaib',
+          ballDetails: [
+            { batsman: 'Sachin', runs: 0, extra: '' },
+            { batsman: 'Sachin', runs: 4, extra: '' }
+          ]
+        }
+      ],
+      striker: 'Sachin',
+      nonStriker: 'Sehwag',
+      // Will get from Story 2
+      currentBowler: 'Shoaib',
+      // Team1 and Team2 will get from Story 1
+      team1: {
+        name: 'Team1',
+        totalScore: 4,
+        wickets: 0,
+        overNumber: 0,
+        ballNumber: 2,
+        isInningsCompleted: false,
+        batsmanList: [
           {
-            bowler: 'Lee',
-            ballDetails: [
-              { batsman: 'Sachin', runs: 0, extra: '' },
-              { batsman: 'Sachin', runs: 4, extra: '' }
-            ]
+            name: 'Sachin',
+            yetToBat: false
+          },
+          {
+            name: 'Sehwag',
+            yetToBat: false
+          },
+          {
+            name: 'Virat',
+            yetToBat: true
+          },
+          {
+            name: 'Rohit',
+            yetToBat: true
+          },
+          {
+            name: 'Rahul',
+            yetToBat: true
+          },
+          {
+            name: 'Ramesh',
+            yetToBat: true
+          },
+          {
+            name: 'Kapil',
+            yetToBat: true
+          },
+          {
+            name: 'MS Dhoni',
+            yetToBat: true
+          },
+          {
+            name: 'Yuvraj',
+            yetToBat: true
+          },
+          {
+            name: 'Irfan',
+            yetToBat: true
+          },
+          {
+            name: 'Zaheer',
+            yetToBat: true
           }
-        ],
-        striker: 'Sachin',
-        nonStriker: 'Sehwag',
-        // Will get from Story 2
-        currentBowler: 'Lee',
-        currentOver: ['0', '4'],
-        // Team1 and Team2 will get from Story 1
-        team1: {
-          name: 'Team1',
-          totalScore: 4,
-          wickets: 0,
-          overNumber: 0,
-          ballNumber: 2,
-          isInningsCompleted: false,
-          batsmanList: [
-            {
-              name: 'Sachin',
-              yetToBat: false
-            },
-            {
-              name: 'Sehwag',
-              yetToBat: false
-            },
-            {
-              name: 'Virat',
-              yetToBat: true
-            },
-            {
-              name: 'Rohit',
-              yetToBat: true
-            },
-            {
-              name: 'Rahul',
-              yetToBat: true
-            },
-            {
-              name: 'Ramesh',
-              yetToBat: true
-            },
-            {
-              name: 'Kapil',
-              yetToBat: true
-            },
-            {
-              name: 'MS Dhoni',
-              yetToBat: true
-            },
-            {
-              name: 'Yuvraj',
-              yetToBat: true
-            },
-            {
-              name: 'Irfan',
-              yetToBat: true
-            },
-            {
-              name: 'Zaheer',
-              yetToBat: true
-            }
-          ]
-        },
-        team2: {
-          name: 'Team2',
-          totalScore: 150,
-          wickets: 7,
-          isInningsCompleted: true,
-          bowlerList: [
-            {
-              name: 'Shoaib'
-            },
-            {
-              name: 'Bret'
-            },
-            {
-              name: 'Shane'
-            },
-            {
-              name: 'Iqbal'
-            },
-            {
-              name: 'Harbhajan'
-            },
-            {
-              name: 'B Kumar'
-            },
-            {
-              name: 'Sohail'
-            },
-            {
-              name: 'Abdul'
-            },
-            {
-              name: 'Razak'
-            },
-            {
-              name: 'Megrath'
-            },
-            {
-              name: 'Murlidharan'
-            }
-          ]
-        },
-        toggleBatsmanDropDown: false,
-        showBatsmanList: false,
-        toggleModal: false,
-        selectedBatsman: ''
-      };
-    });
+        ]
+      },
+      team2: {
+        name: 'Team2',
+        totalScore: 150,
+        wickets: 7,
+        isInningsCompleted: true,
+        bowlerList: [
+          {
+            name: 'Shoaib'
+          },
+          {
+            name: 'Bret'
+          },
+          {
+            name: 'Shane'
+          },
+          {
+            name: 'Iqbal'
+          },
+          {
+            name: 'Harbhajan'
+          },
+          {
+            name: 'B Kumar'
+          },
+          {
+            name: 'Sohail'
+          },
+          {
+            name: 'Abdul'
+          },
+          {
+            name: 'Razak'
+          },
+          {
+            name: 'Megrath'
+          },
+          {
+            name: 'Murlidharan'
+          }
+        ]
+      },
+      toggleBatsmanDropDown: false,
+      showBatsmanList: false,
+      toggleModal: false,
+      selectedBatsman: '',
+      toggleBowlerDropDown: false,
+      selectedBowler: ''
+    };
+  });
 
+  describe('Modify all relevant states on going for next ball', () => {
     it('should return initial state each team', () => {
-      expect(reducer(undefined, {})).toEqual(initialState);
+      expect(reducer(initialState, {})).toEqual(initialState);
     });
 
     it('Add 4 runs on Over 0.3 for Sachin', () => {
@@ -215,7 +218,7 @@ describe('scoreBoardInformation/reducer', () => {
       initialState.team1.ballNumber = 0;
       const finalOverDetails = [
         {
-          bowler: 'Lee',
+          bowler: 'Shoaib',
           ballDetails: [{ batsman: 'Sachin', runs: 0, extra: '' }]
         }
       ];
@@ -227,7 +230,7 @@ describe('scoreBoardInformation/reducer', () => {
     it('Add wide for current bowler on clicking next ball', () => {
       const finalOverDetails = [
         {
-          bowler: 'Lee',
+          bowler: 'Shoaib',
           ballDetails: [
             { batsman: 'Sachin', runs: 0, extra: '' },
             { batsman: 'Sachin', runs: 4, extra: '' },
@@ -285,6 +288,24 @@ describe('scoreBoardInformation/reducer', () => {
       const finalBallNumber = 3;
       const tempState = reducer(initialState, updateScoreDetails(0, 'LB'));
       expect(tempState.team1.ballNumber).toEqual(finalBallNumber);
+    });
+  });
+  describe('Select next bowler and update states', () => {
+    it('Change current bowler to Starc', () => {
+      const tempState = reducer(initialState, changeCurrentBowler('Starc'));
+      expect(tempState.currentBowler).toEqual('Starc');
+    });
+  });
+
+  describe('Get Match details like team-names/overs and update states', () => {
+    it('Set Team1 name to India', () => {
+      const tempState = reducer(initialState, setTeam1Name('India'));
+      expect(tempState.team1.name).toEqual('India');
+    });
+
+    it('Set Team2 name to Australia', () => {
+      const tempState = reducer(initialState, setTeam2Name('Australia'));
+      expect(tempState.team2.name).toEqual('Australia');
     });
   });
 });

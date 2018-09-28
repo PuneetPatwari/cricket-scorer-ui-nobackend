@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { Container, Col, Button, Row, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {
+  Container,
+  Col,
+  Button,
+  Row,
+} from 'reactstrap';
 import { connect } from 'react-redux';
-import { resetSelectedPlayerToBlank, updateOverDetails, updateScoreDetails, swapBatsman, changeBowlerIfOverCompleted, toggleModal, updateStrikerBatsman, updateWicket } from './actions';
+import { resetSelectedPlayerToBlank, updateOverDetails, updateScoreDetails, swapBatsman, changeBowlerIfOverCompleted, toggleBowlerModal, toggleModal, updateStrikerBatsman, updateWicket } from './actions';
 import DropDownModal from '../modal/Modal';
 import './Scorer.css';
 import './BallScore.css';
@@ -15,12 +20,20 @@ class BallScore extends Component {
       isOut: false,
       modal: true,
     };
-    this.toggleModal = this.toggleModal.bind(this);
   }
   onNextBallClick(run, extra, selectedBatsman) {
+    if (this.props.currentOver === this.props.overs) {
+      alert('Game Over. You may watch GAME DETAILS');
+      return;
+    }
     this.props.handleCurrentBall(run, extra, selectedBatsman);
     this.resetRun();
     this.resetExtra();
+    if (this.props.currentBall === 5 && this.props.currentOver < this.props.overs - 1) {
+      console.log("Toggle Bowler Modal");
+      
+      this.props.toggleBowlerModal();
+    }
   }
   setRun(e) {
     this.setState({ run: Number(e.target.value) });
@@ -37,22 +50,24 @@ class BallScore extends Component {
   toggleIsOut() {
     this.setState({ isOut: !this.state.isOut });
   }
-  toggleModal() {
-    this.setState({ modal: !this.state.modal });
-  }
+  // toggleModal() {
+  //   this.setState({ modal: !this.state.modal });
+  // }
   renderRuns() {
     const rows = [];
     for (let i = 0; i < 8; i += 1) {
-      rows.push(<Button
-        className={`run-button ${i === this.state.run ? 'bg-blue' : ''}`}
-        key={i}
-        value={i}
-        onClick={event => this.setRun(event)}
-        color="primary"
-      >
-        {'  '}
-        {i}{'  '}
-      </Button>);
+      rows.push(
+        <Button
+          className={`run-button ${i === this.state.run ? 'bg-blue' : ''}`}
+          key={i}
+          value={i}
+          onClick={event => this.setRun(event)}
+          color="primary"
+        >
+          {'  '}
+          {i}
+          {'  '}
+        </Button>);
     }
     return (
       <Container className="select-score">
@@ -71,7 +86,7 @@ class BallScore extends Component {
       <Container>
         <Container>
           <Row>
-            <Col style={{ textAlign: 'left' }} >
+            <Col style={{ textAlign: 'left' }}>
               <h5> Extras: </h5>
             </Col>
           </Row>
@@ -110,7 +125,6 @@ class BallScore extends Component {
             LB
           </Button>
         </Container>
-
       </Container>
     );
   }
@@ -118,7 +132,7 @@ class BallScore extends Component {
   renderOut() {
     return (
       <Container>
-        {this.props.selectedBatsman == '' ?
+        {this.props.selectedBatsman === '' ?
           <Col style={{ textAlign: 'center' }}>
             <Button color="danger" onClick={() => handlePlayerOut(this.props)}> Out </Button>
             <DropDownModal batsman={true} />
@@ -140,7 +154,6 @@ class BallScore extends Component {
             outline
             color="primary"
             onClick={() => this.onNextBallClick(this.state.run, this.state.extra, this.props.selectedBatsman)}
-          // If out is pressed make the batsman empty and do all action for next ball click followed by modal display
           >
             Next Ball
           </Button>
@@ -150,29 +163,14 @@ class BallScore extends Component {
   }
 
   renderModalForNextBowler() {
-    if (this.state.isOut) {
-      return (
-        <div>
-          <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
-            <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader>
-            <ModalBody>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </ModalBody>
-            <ModalFooter>
-              <Button color="primary" onClick={this.toggleModal}>Do Something</Button>{' '}
-              <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
-            </ModalFooter>
-          </Modal>
-        </div>
-
-      );
-    }
-    return (
-      <div />
-    );
+    return (<div>
+        <DropDownModal batsman={false} />
+      </div>);
   }
+
   render() {
+    console.log('Rendrer Model');
+    
     return (
       <div>
         {this.renderRuns()}
@@ -182,14 +180,13 @@ class BallScore extends Component {
         {this.renderOut()}
         <br />
         {this.renderNextBall()}
-        {this.renderModalForNextBowler()}
-        {/* <button onClick={() => this.onNextBallClick(this.state.run)}>Next ball</button> */}
+        { this.renderModalForNextBowler() }
       </div>
     );
   }
 }
 
-const handlePlayerOut = props => {
+const handlePlayerOut = (props) => {
   if (props.wickets === 9) {
     props.updateWicket();
     setTimeout(() => {
@@ -198,7 +195,7 @@ const handlePlayerOut = props => {
   } else {
     props.toggleModal();
   }
-}
+};
 
 const mapStateToProps = state => ({
   currentOverDetails: state.scoreBoardInformation.overDetails,
@@ -207,6 +204,8 @@ const mapStateToProps = state => ({
   currentBowler: state.scoreBoardInformation.currentBowler,
   wickets: state.scoreBoardInformation.team1.wickets,
   selectedBatsman: state.scoreBoardInformation.selectedBatsman,
+  overs: state.gameInformation.numberOfOvers,
+  toggleBowlerModal: state.scoreBoardInformation.toggleBowlerModal,
 });
 
 
@@ -226,6 +225,7 @@ const mapDispatchProps = dispatch => ({
     dispatch(resetSelectedPlayerToBlank())
   },
   toggleModal: () => dispatch(toggleModal()),
+  toggleBowlerModal: () => dispatch(toggleBowlerModal()),
   updateWicket: () => dispatch(updateWicket()),
 });
 

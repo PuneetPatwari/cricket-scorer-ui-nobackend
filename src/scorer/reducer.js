@@ -1,25 +1,21 @@
 const initialState = {
   overDetails: [
     {
-      bowler: 'Lee',
-      ballDetails: [
-        { batsman: 'Sachin', runs: 0, extra: '' },
-        { batsman: 'Sachin', runs: 4, extra: '' }
-      ]
+      bowler: '',
+      ballDetails: []
     }
   ],
   showBatsmanList: false,
   striker: 'Sachin',
   nonStriker: 'Sehwag',
   // Will get from Story 2
-  currentBowler: 'Lee',
-  currentOver: ['0', '4'],
+  currentBowler: 'Shoaib',
   team1: {
     name: 'Team1',
-    totalScore: 4,
+    totalScore: 0,
     wickets: 0,
     overNumber: 0,
-    ballNumber: 2,
+    ballNumber: 0,
     isInningsCompleted: false,
     batsmanList: [
       {
@@ -70,11 +66,14 @@ const initialState = {
   },
   toggleBatsmanDropDown: false,
   toggleModal: false,
+  toggleBowlerModal: false,
   selectedBatsman: '',
+  selectedBowler: '',
+  toggleBowlerDropDown: false,
   team2: {
     name: 'Team2',
-    totalScore: 150,
-    wickets: 7,
+    totalScore: 80,
+    wickets: 5,
     isInningsCompleted: true,
     bowlerList: [
       {
@@ -177,10 +176,21 @@ const reducer = function (state = initialState, action) {
       let currentExtra = action.extra;
       if ((currentExtra === 'B' || currentExtra === 'LB') && action.runs === 0) currentExtra = '';
       if (state.team1.ballNumber === 0) {
+        if (state.team1.overNumber === 0) {
+          return {
+            ...state,
+            overDetails: [
+              {
+                bowler: state.currentBowler,
+                ballDetails: [{ batsman: state.striker, runs: action.runs, extra: currentExtra }]
+              }
+            ]
+          };
+        }
         return {
           ...state,
           overDetails: [
-            ...state.overDetails,
+            ...state.overDetails.slice(0, state.team1.currentOverNumber),
             {
               bowler: state.currentBowler,
               ballDetails: [{ batsman: state.striker, runs: action.runs, extra: currentExtra }]
@@ -193,7 +203,7 @@ const reducer = function (state = initialState, action) {
         overDetails: [
           ...state.overDetails.slice(0, state.team1.overNumber),
           {
-            ...state.overDetails[state.team1.overNumber],
+            bowler: state.currentBowler,
             ballDetails: [
               ...state.overDetails[state.team1.overNumber].ballDetails,
               // Check extra field befre adding score for batsman later
@@ -222,7 +232,6 @@ const reducer = function (state = initialState, action) {
     }
 
     case 'SET_TEAM1_NAME': {
-      console.log(state);
       return {
         ...state,
         team1: {
@@ -233,7 +242,6 @@ const reducer = function (state = initialState, action) {
     }
 
     case 'SET_TEAM2_NAME': {
-      console.log(state);
       return {
         ...state,
         team2: {
@@ -249,6 +257,10 @@ const reducer = function (state = initialState, action) {
 
     case 'TOGGLE_MODAL': {
       return { ...state, toggleModal: !state.toggleModal };
+    }
+
+    case 'TOGGLE_BOWLER_MODAL': {
+      return { ...state, toggleBowlerModal: !state.toggleBowlerModal };
     }
 
     case 'UPDATE_WICKET': {
@@ -269,8 +281,24 @@ const reducer = function (state = initialState, action) {
       return { ...state, selectedBatsman: action.name };
     }
 
+    case 'SELECT_BOWLER': {
+      return { ...state, selectedBowler: action.name };
+    }
+
     case 'UPDATE_STRIKER_BATSMAN': {
       return { ...state, striker: state.selectedBatsman };
+    }
+    case 'CHANGE_CURRENT_BOWLER': {
+      return {
+        ...state,
+        currentBowler: action.value,
+        selectedBowler: '',
+        toggleBowlerModal: !state.toggleBowlerModal
+      };
+    }
+
+    case 'TOGGLE_BOWLER_DROPDOWN': {
+      return { ...state, toggleBowlerDropDown: !state.toggleBowlerDropDown };
     }
 
     case 'SET_STRIKER_NON_STRIKER': {
@@ -286,7 +314,9 @@ const reducer = function (state = initialState, action) {
 
     case 'SET_CURRENT_BLOWER': {
       const bolwersList = action.value;
-      return { ...state, currentBowler: bolwersList[0].name };
+      const updatedOverDetails = state.overDetails;
+      updatedOverDetails.bowler = bolwersList[0].name;
+      return { ...state, currentBowler: bolwersList[0].name, overDetails: updatedOverDetails };
     }
     case 'RESET_SELECTED_PLAYER_TO_BLANK': {
       return { ...state, selectedBatsman: '' };

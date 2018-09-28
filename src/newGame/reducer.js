@@ -10,10 +10,10 @@ const initialState = {
     'Player1.8',
     'Player1.9',
     'Player1.10',
-    'Player1.11',
+    'Player1.11'
   ],
   team2Players: [
-    'Player2.1',
+    'Lee',
     'Player2.2',
     'Player2.3',
     'Player2.4',
@@ -23,9 +23,9 @@ const initialState = {
     'Player2.8',
     'Player2.9',
     'Player2.10',
-    'Player2.11',
+    'Player2.11'
   ],
-  numberOfOvers: 5,
+  numberOfOvers: 3
   // currentOverDetails: ['1', '2', 'Wd', '0', '4'],
   // currentBowler: 'Player2.1',
 };
@@ -36,12 +36,12 @@ const reducer = function (state = initialState, action) {
     case 'SET_NUMBER_OF_OVERS': {
       return { ...state, numberOfOvers: action.value };
     }
-    case 'SET_TEAM1_NAME': {
-      return { ...state, team1: { ...state.team1, name: action.value } };
-    }
-    case 'SET_TEAM2_NAME': {
-      return { ...state, team1: { ...state.team2, name: action.value } };
-    }
+    // case 'SET_TEAM1_NAME': {
+    //   return { ...state, team1: { ...state.team1, name: action.value } };
+    // }
+    // case 'SET_TEAM2_NAME': {
+    //   return { ...state, team1: { ...state.team2, name: action.value } };
+    // }
     case 'SET_BATMENSLIST': {
       const batmsens = action.value.map(p => p.name);
       return { ...state, team1Players: batmsens };
