@@ -18,28 +18,54 @@ class BallScore extends Component {
       run: -1,
       extra: '',
       isOut: false,
-      modal: true,
     };
   }
   onNextBallClick(run, extra, selectedBatsman) {
     if (this.props.currentOver === this.props.overs) {
-      alert('Game Over. You may watch GAME DETAILS');
+      if (this.props.team1Score.totalScore > this.props.team2Score.totalScore) {
+        alert(`${this.props.team1Score.name } has WON. You may watch GAME DETAILS`);
+        return;
+      }
+      if (this.props.team1Score.totalScore < this.props.team2Score.totalScore) {
+        alert(`${this.props.team2Score.name } has WON. You may watch GAME DETAILS`);
+        return;
+      }
+      if (this.props.team1Score.totalScore === this.props.team2Score.totalScore) {
+        alert('Match has ended in a TIE. You may watch GAME DETAILS');
+        return;
+      }
+    }
+    if (this.props.team1Score.totalScore > this.props.team2Score.totalScore) {
+      alert(`${this.props.team1Score.name } has WON. You may watch GAME DETAILS`);
       return;
     }
     this.props.handleCurrentBall(run, extra, selectedBatsman);
     this.resetRun();
     this.resetExtra();
+    if (this.props.team1Score.totalScore > this.props.team2Score.totalScore) {
+      alert('Team1 has WON. You may watch GAME DETAILS');
+      return;
+    }
     if (this.props.currentBall === 5 && this.props.currentOver < this.props.overs - 1) {
       console.log("Toggle Bowler Modal");
       
       this.props.toggleBowlerModal();
     }
   }
+
+  
   setRun(e) {
     this.setState({ run: Number(e.target.value) });
   }
   setExtra(e) {
     this.setState({ extra: this.state.extra === e.target.value ? '' : e.target.value });
+  }
+  isTeam1Won() {
+    if (this.props.team1Score.totalScore > this.props.team2Score.totalScore) {
+      alert(`${this.props.team1Score.name } has WON. You may watch GAME DETAILS`);
+      return true;
+    }
+    return false;
   }
   resetExtra() {
     this.setState({ extra: '' });
@@ -203,6 +229,8 @@ const mapStateToProps = state => ({
   currentBall: state.scoreBoardInformation.team1.ballNumber,
   currentBowler: state.scoreBoardInformation.currentBowler,
   wickets: state.scoreBoardInformation.team1.wickets,
+  team1Score: state.scoreBoardInformation.team1,
+  team2Score: state.scoreBoardInformation.team2,
   selectedBatsman: state.scoreBoardInformation.selectedBatsman,
   overs: state.gameInformation.numberOfOvers,
   toggleBowlerModal: state.scoreBoardInformation.toggleBowlerModal,
