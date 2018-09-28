@@ -7,28 +7,43 @@ import ScoreBoard from '../scorer/Scoreboard';
 import BatsmenStats from './BatsmenStats';
 import BowlerStats from './BowlerStats';
 import './GameDetails.css';
+import '../style.css';
 
 const GameDetails = () => (
-  <Container>
-    <div>
-      <Row className="heading">
-        <div className="scoreboard"><ScoreBoard /></div>
-        <div className="btn-back" style={{ textAlign: 'left' }}>
-          <Link className="btn btn-primary" to="/scorer"> Back </Link>
+  <div className="outermost-cotainer">
+    <div className="inner-container">
+      <Container>
+        <div>
+          <Row className="heading">
+            <div className="scoreboard">
+              <ScoreBoard />
+            </div>
+            <div className="btn-back" style={{ textAlign: 'left' }}>
+              <Link className="btn btn-primary" to="/scorer">
+                {' '}
+                Back{' '}
+              </Link>
+            </div>
+          </Row>
+          <br />
+          <br />
+          <Row>
+            <Col>
+              {' '}
+              <BatsmenStats />
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col>
+              {' '}
+              <BowlerStats />
+            </Col>
+          </Row>
         </div>
-      </Row>
-      <br />
-      <br />
-      <Row>
-        <Col> <BatsmenStats /></Col>
-      </Row>
-      <br />
-      <Row>
-        <Col> <BowlerStats /></Col>
-      </Row>
+      </Container>
     </div>
-  </Container>
-
+  </div>
 );
 
 export default GameDetails;

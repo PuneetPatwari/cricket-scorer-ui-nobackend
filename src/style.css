@@ -1,0 +1,13 @@
+.outermost-cotainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .inner-container {
+    width: fit-content !important ;
+    border: 1px solid black !important ;
+    margin: 20px;
+    padding: 40px 20px;
+    border-radius: 30px;
+    background: lightgrey;
+  }

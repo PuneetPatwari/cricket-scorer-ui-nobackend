@@ -3,6 +3,7 @@ import RLink from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import { Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import { setTeam1Name, setTeam2Name, setNumberOfOvers } from './actions';
+import '../style.css';
 
 class NewGame extends Component {
   constructor(props) {
@@ -26,58 +27,62 @@ class NewGame extends Component {
 
   render() {
     return (
-      <div>
-        <center>
-          <Col sm={{ size: 10 }}>
-            <h4>Enter the game details</h4>
-          </Col>
-          <Form>
-            <FormGroup style={{ width: '200px' }}>
-              <Label for="teamName1">Team 1 Name</Label>
-              <Input
-                name="teamName2"
-                id="teamName1"
-                onChange={event => this.setTeam1Name(event.target.value)}
-              />
-            </FormGroup>
-            <FormGroup style={{ width: '200px' }}>
-              <Label for="teamName2">Team 2 Name</Label>
-              <Input
-                name="teamName2"
-                id="teamName2"
-                onChange={event => this.setTeam2Name(event.target.value)}
-              />
-            </FormGroup>
-            <FormGroup style={{ width: '200px' }}>
-              <Label for="numberOfOver">Number of Overs</Label>
-              <Input
-                name="numberOfOver"
-                id="numberOfOvers"
-                type="number"
-                onChange={event => this.setNumberOfOvers(event.target.value)}
-              />
-            </FormGroup>
-            <FormGroup check row>
+      <div className="outermost-cotainer">
+        <div className="inner-container">
+          <div>
+            <center>
               <Col sm={{ size: 10 }}>
-                {/* <Button>Submit Game Details</Button> */}
-                <RLink
-                  className="btn btn-primary"
-                  to="/playerDetails"
-                  onClick={() =>
-                    this.props.submitGameDetails(
-                      this.state.team1Name,
-                      this.state.team2Name,
-                      this.state.numberOfOvers,
-                    )
-                  }
-                >
-                  {' '}
-                  Submit Game Details{' '}
-                </RLink>
+                <h4>Enter the game details</h4>
               </Col>
-            </FormGroup>
-          </Form>
-        </center>
+              <Form>
+                <FormGroup style={{ width: '200px' }}>
+                  <Label for="teamName1">Team 1 Name</Label>
+                  <Input
+                    name="teamName2"
+                    id="teamName1"
+                    onChange={event => this.setTeam1Name(event.target.value)}
+                  />
+                </FormGroup>
+                <FormGroup style={{ width: '200px' }}>
+                  <Label for="teamName2">Team 2 Name</Label>
+                  <Input
+                    name="teamName2"
+                    id="teamName2"
+                    onChange={event => this.setTeam2Name(event.target.value)}
+                  />
+                </FormGroup>
+                <FormGroup style={{ width: '200px' }}>
+                  <Label for="numberOfOver">Number of Overs</Label>
+                  <Input
+                    name="numberOfOver"
+                    id="numberOfOvers"
+                    type="number"
+                    onChange={event => this.setNumberOfOvers(event.target.value)}
+                  />
+                </FormGroup>
+                <FormGroup check row>
+                  <Col sm={{ size: 10 }}>
+                    {/* <Button>Submit Game Details</Button> */}
+                    <RLink
+                      className="btn btn-primary"
+                      to="/playerDetails"
+                      onClick={() =>
+                        this.props.submitGameDetails(
+                          this.state.team1Name,
+                          this.state.team2Name,
+                          this.state.numberOfOvers,
+                        )
+                      }
+                    >
+                      {' '}
+                      Submit Game Details{' '}
+                    </RLink>
+                  </Col>
+                </FormGroup>
+              </Form>
+            </center>
+          </div>
+        </div>
       </div>
     );
   }
